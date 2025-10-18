@@ -2,7 +2,10 @@ module github.com/grokify/slogo
 
 go 1.24.5
 
-require github.com/OpenSLO/go-sdk v0.8.0
+require (
+	github.com/OpenSLO/go-sdk v0.8.0
+	github.com/grokify/mogo v0.71.3
+)
 
 require (
 	github.com/nobl9/govy v0.20.0 // indirect
