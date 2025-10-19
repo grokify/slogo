@@ -49,10 +49,11 @@ const (
 
 // Severity indicates the impact of an SLO breach
 const (
-	SeverityCritical = "critical" // Immediate action required
-	SeverityHigh     = "high"     // Action required soon
-	SeverityMedium   = "medium"   // Should be addressed
-	SeverityLow      = "low"      // Nice to fix
+	SeverityCritical      = "critical" // Immediate action required
+	SeverityHigh          = "high"     // Action required soon
+	SeverityMedium        = "medium"   // Should be addressed
+	SeverityLow           = "low"      // Nice to fix
+	SeverityInformational = "info"     // Informational only, no risk
 )
 
 // Tier indicates the service tier or priority
