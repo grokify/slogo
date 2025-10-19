@@ -1,13 +1,11 @@
 package saascrm
 
 import (
-	"testing"
-
 	v1 "github.com/OpenSLO/go-sdk/pkg/openslo/v1"
 )
 
-func TestSaaSCRMSLOs(t *testing.T) {
-	sloTests := []v1.SLO{
+func SLOs() []v1.SLO {
+	return []v1.SLO{
 		// User activation metrics
 		ExampleUserActivationSLO(),
 		ExampleTimeToFirstValueSLO(),
@@ -37,10 +35,5 @@ func TestSaaSCRMSLOs(t *testing.T) {
 		ExampleChurnRateSLO(),
 		ExampleResurrectionRateSLO(),
 		ExampleCohortRetentionSLO(),
-	}
-	for _, tt := range sloTests {
-		if err := tt.Validate(); err != nil {
-			t.Errorf("slo.Validate() error for %s: (%s)", tt.Metadata.Name, err.Error())
-		}
 	}
 }
