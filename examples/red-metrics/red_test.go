@@ -12,6 +12,7 @@ func TestREDMetricsSLOs(t *testing.T) {
 		ExampleErrorRateSLO(),
 		ExampleDurationSLO(),
 		ExampleDurationP99SLO(),
+		ExampleAvailabilitySLO(),
 	}
 	for _, tt := range sloTests {
 		if err := tt.Validate(); err != nil {

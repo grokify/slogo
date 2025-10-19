@@ -123,6 +123,7 @@ func GetLabelDefinitions() map[string][]string {
 			MetricTypeRate,
 			MetricTypeErrors,
 			MetricTypeDuration,
+			MetricTypeAvailability,
 			MetricTypeUtilization,
 			MetricTypeSaturation,
 			MetricTypeSatisfaction,

@@ -67,9 +67,10 @@ const (
 // MetricType provides additional categorization within a domain
 const (
 	// RED metric types
-	MetricTypeRate     = "rate"
-	MetricTypeErrors   = "errors"
-	MetricTypeDuration = "duration"
+	MetricTypeRate         = "rate"
+	MetricTypeErrors       = "errors"
+	MetricTypeDuration     = "duration"
+	MetricTypeAvailability = "availability" // Derived from rate and errors
 
 	// USE metric types
 	MetricTypeUtilization = "utilization"
