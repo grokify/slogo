@@ -6,6 +6,7 @@ import (
 	"sort"
 	"strings"
 
+	v1 "github.com/OpenSLO/go-sdk/pkg/openslo/v1"
 	"github.com/grokify/mogo/text/markdown"
 
 	"github.com/grokify/slogo/examples"
@@ -13,17 +14,22 @@ import (
 )
 
 func main() {
-	// Collect SLOs from all directories
+	filename := "examples/METRICS.md"
 	directories := examples.ExampleSLOsByDirectory()
+	WriteReport(filename, directories)
+
+}
+
+func WriteReport(filename string, slos map[string][]v1.SLO) error {
+	// Collect SLOs from all directories
 
 	// Get label definitions
 	labelDefs := ontology.GetLabelDefinitions()
 
 	// Open output file
-	f, err := os.Create("examples/METRICS.md")
+	f, err := os.Create(filename)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error creating file: %v\n", err)
-		os.Exit(1)
+		return err
 	}
 	defer f.Close()
 
@@ -63,15 +69,15 @@ func main() {
 		tableBuilder.WriteString("-------|\n")
 
 		// Get sorted directory names
-		dirNames := make([]string, 0, len(directories))
-		for dir := range directories {
+		dirNames := make([]string, 0, len(slos))
+		for dir := range slos {
 			dirNames = append(dirNames, dir)
 		}
 		sort.Strings(dirNames)
 
 		// For each directory, count SLOs by label value
 		for _, dir := range dirNames {
-			slos := directories[dir]
+			slos := slos[dir]
 			counts := make(map[string]int)
 			total := 0
 
@@ -102,8 +108,7 @@ func main() {
 		alignedTable := markdown.TableAlign(tableBuilder.String(), 1)
 		fmt.Fprintln(f, alignedTable)
 	}
-
-	fmt.Println("Generated examples/METRICS.md")
+	return nil
 }
 
 func formatLabelName(name string) string {
