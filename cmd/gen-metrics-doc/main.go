@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"sort"
 	"strings"
@@ -16,8 +17,10 @@ import (
 func main() {
 	filename := "examples/METRICS.md"
 	directories := examples.ExampleSLOsByDirectory()
-	WriteReport(filename, directories)
-
+	err := WriteReport(filename, directories)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func WriteReport(filename string, slos map[string][]v1.SLO) error {
