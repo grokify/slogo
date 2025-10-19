@@ -16,14 +16,14 @@ func ExampleAgentAvailabilitySLO() v1.SLO {
 			Name:        "agent-availability",
 			DisplayName: "AI Agent Service Availability",
 			Labels: ontology.NewLabels(map[string]string{
-				ontology.LabelFramework:  ontology.FrameworkCustom,
-				ontology.LabelLayer:      ontology.LayerBusiness,
-				ontology.LabelScope:      ontology.ScopeCustomerFacing,
-				ontology.LabelAudience:   ontology.AudienceProduct,
-				ontology.LabelCategory:   ontology.CategoryAvailability,
-				ontology.LabelSeverity:   ontology.SeverityCritical,
-				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelFramework: ontology.FrameworkCustom,
+				ontology.LabelLayer:     ontology.LayerBusiness,
+				ontology.LabelScope:     ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:  ontology.AudienceProduct,
+				ontology.LabelCategory:  ontology.CategoryAvailability,
+				ontology.LabelSeverity:  ontology.SeverityCritical,
+				ontology.LabelTier:      ontology.TierP0,
+				ontology.LabelDomain:    ontology.DomainAIML,
 			})},
 		v1.SLOSpec{
 			Description: "Ensure AI agents are available when users need them - successful agent sessions vs total attempts",
@@ -62,8 +62,8 @@ func ExampleAgentAvailabilitySLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High availability",
-					Target:          pointer.Pointer(float64(0.999)),      // 99.9% availability
-					TimeSliceTarget: pointer.Pointer(float64(0.95)),       // 95% of time slices meet target
+					Target:          pointer.Pointer(float64(0.999)), // 99.9% availability
+					TimeSliceTarget: pointer.Pointer(float64(0.95)),  // 95% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(5, v1.DurationShorthandUnitMinute)),
 				},
 			},
@@ -115,8 +115,8 @@ func ExamplePerUserAgentAvailabilitySLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Consistent user experience",
-					Target:          pointer.Pointer(float64(0.95)),       // 95% of users should have >=99% success rate
-					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
+					Target:          pointer.Pointer(float64(0.95)), // 95% of users should have >=99% success rate
+					TimeSliceTarget: pointer.Pointer(float64(0.90)), // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitHour)),
 				},
 			},

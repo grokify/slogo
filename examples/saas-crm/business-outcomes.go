@@ -93,8 +93,8 @@ func ExampleDealWinRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Healthy win rate",
-					Target:          pointer.Pointer(float64(0.30)),       // 30% win rate
-					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
+					Target:          pointer.Pointer(float64(0.30)), // 30% win rate
+					TimeSliceTarget: pointer.Pointer(float64(0.85)), // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},

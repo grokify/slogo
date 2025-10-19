@@ -63,8 +63,8 @@ func ExampleDay7RetentionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Strong early retention",
-					Target:          pointer.Pointer(float64(0.50)),       // 50% return on day 7
-					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
+					Target:          pointer.Pointer(float64(0.50)), // 50% return on day 7
+					TimeSliceTarget: pointer.Pointer(float64(0.80)), // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -116,8 +116,8 @@ func ExampleDay30RetentionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Good monthly retention",
-					Target:          pointer.Pointer(float64(0.40)),       // 40% return on day 30
-					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
+					Target:          pointer.Pointer(float64(0.40)), // 40% return on day 30
+					TimeSliceTarget: pointer.Pointer(float64(0.80)), // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -212,8 +212,8 @@ func ExampleResurrectionRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Healthy resurrection rate",
-					Target:          pointer.Pointer(float64(0.10)),       // 10% of dormant users return
-					TimeSliceTarget: pointer.Pointer(float64(0.75)),       // 75% of time slices meet target
+					Target:          pointer.Pointer(float64(0.10)), // 10% of dormant users return
+					TimeSliceTarget: pointer.Pointer(float64(0.75)), // 75% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -265,8 +265,8 @@ func ExampleCohortRetentionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Strong long-term retention",
-					Target:          pointer.Pointer(float64(0.35)),       // 35% still active after 90 days
-					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
+					Target:          pointer.Pointer(float64(0.35)), // 35% still active after 90 days
+					TimeSliceTarget: pointer.Pointer(float64(0.80)), // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},

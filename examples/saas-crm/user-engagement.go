@@ -300,8 +300,8 @@ func ExamplePowerUserRatioSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Healthy power user base",
-					Target:          pointer.Pointer(float64(0.25)),       // 25% of MAU are power users
-					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
+					Target:          pointer.Pointer(float64(0.25)), // 25% of MAU are power users
+					TimeSliceTarget: pointer.Pointer(float64(0.85)), // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},

@@ -63,8 +63,8 @@ func ExampleUserActivationSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Strong activation rate",
-					Target:          pointer.Pointer(float64(0.60)),       // 60% of new users activate
-					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
+					Target:          pointer.Pointer(float64(0.60)), // 60% of new users activate
+					TimeSliceTarget: pointer.Pointer(float64(0.85)), // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -116,8 +116,8 @@ func ExampleTimeToFirstValueSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Fast time to value",
-					Target:          pointer.Pointer(float64(0.50)),       // 50% create first contact in 24h
-					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
+					Target:          pointer.Pointer(float64(0.50)), // 50% create first contact in 24h
+					TimeSliceTarget: pointer.Pointer(float64(0.80)), // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -169,8 +169,8 @@ func ExampleOnboardingCompletionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High onboarding completion",
-					Target:          pointer.Pointer(float64(0.70)),       // 70% complete onboarding
-					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
+					Target:          pointer.Pointer(float64(0.70)), // 70% complete onboarding
+					TimeSliceTarget: pointer.Pointer(float64(0.85)), // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},

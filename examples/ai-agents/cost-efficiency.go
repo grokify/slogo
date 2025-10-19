@@ -105,8 +105,8 @@ func ExamplePerUserCostSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Cost within budget",
-					Target:          pointer.Pointer(float64(0.95)),       // 95% of users under budget
-					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
+					Target:          pointer.Pointer(float64(0.95)), // 95% of users under budget
+					TimeSliceTarget: pointer.Pointer(float64(0.90)), // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -201,8 +201,8 @@ func ExampleCacheHitRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High cache efficiency",
-					Target:          pointer.Pointer(float64(0.70)),       // 70% cache hit rate
-					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
+					Target:          pointer.Pointer(float64(0.70)), // 70% cache hit rate
+					TimeSliceTarget: pointer.Pointer(float64(0.85)), // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(5, v1.DurationShorthandUnitMinute)),
 				},
 			},
