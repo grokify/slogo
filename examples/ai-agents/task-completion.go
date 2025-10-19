@@ -50,7 +50,8 @@ func ExampleTaskCompletionRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High task completion",
-					Target:          pointer.Pointer(float64(0.90)), // 90% task completion rate
+					Target:          pointer.Pointer(float64(0.90)),       // 90% task completion rate
+					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(10, v1.DurationShorthandUnitMinute)),
 				},
 			},
@@ -102,7 +103,8 @@ func ExamplePerUserTaskCompletionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Consistent user success",
-					Target:          pointer.Pointer(float64(0.90)), // 90% of users have >=85% completion rate
+					Target:          pointer.Pointer(float64(0.90)),       // 90% of users have >=85% completion rate
+					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -154,7 +156,8 @@ func ExampleTaskAbandonmentRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Low abandonment rate",
-					Target:          pointer.Pointer(float64(0.95)), // 95% of tasks not abandoned (5% abandonment)
+					Target:          pointer.Pointer(float64(0.95)),       // 95% of tasks not abandoned (5% abandonment)
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(10, v1.DurationShorthandUnitMinute)),
 				},
 			},
@@ -206,7 +209,8 @@ func ExampleMultiStepTaskSuccessSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Complex task reliability",
-					Target:          pointer.Pointer(float64(0.85)), // 85% completion for complex tasks
+					Target:          pointer.Pointer(float64(0.85)),       // 85% completion for complex tasks
+					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(10, v1.DurationShorthandUnitMinute)),
 				},
 			},

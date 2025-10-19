@@ -93,7 +93,8 @@ func ExampleUserRetentionSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Good user retention",
-					Target:          pointer.Pointer(float64(0.60)), // 60% 7-day retention
+					Target:          pointer.Pointer(float64(0.60)),       // 60% 7-day retention
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},

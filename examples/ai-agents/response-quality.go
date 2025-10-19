@@ -50,7 +50,8 @@ func ExampleAgentResponseQualitySLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High user satisfaction",
-					Target:          pointer.Pointer(float64(0.85)), // 85% positive ratings
+					Target:          pointer.Pointer(float64(0.85)),       // 85% positive ratings
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(10, v1.DurationShorthandUnitMinute)),
 				},
 			},
@@ -102,7 +103,8 @@ func ExamplePerUserResponseQualitySLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Consistent quality across users",
-					Target:          pointer.Pointer(float64(0.90)), // 90% of users have >=80% positive ratings
+					Target:          pointer.Pointer(float64(0.90)),       // 90% of users have >=80% positive ratings
+					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -154,7 +156,8 @@ func ExampleAgentAccuracySLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High accuracy",
-					Target:          pointer.Pointer(float64(0.95)), // 95% accurate responses
+					Target:          pointer.Pointer(float64(0.95)),       // 95% accurate responses
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(10, v1.DurationShorthandUnitMinute)),
 				},
 			},

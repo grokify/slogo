@@ -94,7 +94,8 @@ func ExampleNetworkErrorsSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Low network error rate",
-					Target:          pointer.Pointer(float64(0.9999)), // 99.99% packets without errors
+					Target:          pointer.Pointer(float64(0.9999)),      // 99.99% packets without errors
+					TimeSliceTarget: pointer.Pointer(float64(0.95)),        // 95% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(5, v1.DurationShorthandUnitMinute)),
 				},
 			},

@@ -93,7 +93,8 @@ func ExamplePerUserResponseTimeSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Consistent performance",
-					Target:          pointer.Pointer(float64(0.95)), // 95% of users have P95 < 3s
+					Target:          pointer.Pointer(float64(0.95)),       // 95% of users have P95 < 3s
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitHour)),
 				},
 			},

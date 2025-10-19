@@ -51,12 +51,14 @@ func ExampleErrorRateSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "High reliability",
-					Target:          pointer.Pointer(float64(0.999)), // 99.9% success rate
+					Target:          pointer.Pointer(float64(0.999)),      // 99.9% success rate
+					TimeSliceTarget: pointer.Pointer(float64(0.95)),       // 95% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(5, v1.DurationShorthandUnitMinute)),
 				},
 				{
 					DisplayName:     "Acceptable reliability",
-					Target:          pointer.Pointer(float64(0.99)), // 99% success rate
+					Target:          pointer.Pointer(float64(0.99)),       // 99% success rate
+					TimeSliceTarget: pointer.Pointer(float64(0.90)),       // 90% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(5, v1.DurationShorthandUnitMinute)),
 				},
 			},

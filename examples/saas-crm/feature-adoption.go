@@ -50,7 +50,8 @@ func ExampleContactManagementUsageSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Strong contact feature adoption",
-					Target:          pointer.Pointer(float64(0.80)), // 80% of active users use contacts
+					Target:          pointer.Pointer(float64(0.80)),       // 80% of active users use contacts
+					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -102,7 +103,8 @@ func ExampleDealPipelineUsageSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Good deal pipeline adoption",
-					Target:          pointer.Pointer(float64(0.60)), // 60% of active users use deals
+					Target:          pointer.Pointer(float64(0.60)),       // 60% of active users use deals
+					TimeSliceTarget: pointer.Pointer(float64(0.80)),       // 80% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -154,7 +156,8 @@ func ExampleEmailIntegrationUsageSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Strong email integration",
-					Target:          pointer.Pointer(float64(0.70)), // 70% have email connected
+					Target:          pointer.Pointer(float64(0.70)),       // 70% have email connected
+					TimeSliceTarget: pointer.Pointer(float64(0.85)),       // 85% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -206,7 +209,8 @@ func ExampleReportingUsageSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Good reporting adoption",
-					Target:          pointer.Pointer(float64(0.45)), // 45% of users view reports weekly
+					Target:          pointer.Pointer(float64(0.45)),       // 45% of users view reports weekly
+					TimeSliceTarget: pointer.Pointer(float64(0.75)),       // 75% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
@@ -258,7 +262,8 @@ func ExampleMobileAppUsageSLO() v1.SLO {
 			Objectives: []v1.SLOObjective{
 				{
 					DisplayName:     "Growing mobile adoption",
-					Target:          pointer.Pointer(float64(0.35)), // 35% use mobile app monthly
+					Target:          pointer.Pointer(float64(0.35)),       // 35% use mobile app monthly
+					TimeSliceTarget: pointer.Pointer(float64(0.75)),       // 75% of time slices meet target
 					TimeSliceWindow: pointer.Pointer(v1.NewDurationShorthand(1, v1.DurationShorthandUnitDay)),
 				},
 			},
