@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleCPUUtilizationSLO is a SLO that measures CPU utilization.
@@ -13,7 +14,18 @@ func ExampleCPUUtilizationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cpu-utilization",
-			DisplayName: "CPU Utilization"},
+			DisplayName: "CPU Utilization",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelMetricType:   ontology.MetricTypeUtilization,
+				ontology.LabelResourceType: ontology.ResourceTypeCPU,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor CPU utilization to ensure resources are not over-utilized",
 			Service:     "backend-service",
@@ -56,7 +68,18 @@ func ExampleMemoryUtilizationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "memory-utilization",
-			DisplayName: "Memory Utilization"},
+			DisplayName: "Memory Utilization",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeUtilization,
+				ontology.LabelResourceType: ontology.ResourceTypeMemory,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor memory utilization to prevent out-of-memory conditions",
 			Service:     "backend-service",
@@ -99,7 +122,18 @@ func ExampleDiskUtilizationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "disk-utilization",
-			DisplayName: "Disk Utilization"},
+			DisplayName: "Disk Utilization",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelMetricType:   ontology.MetricTypeUtilization,
+				ontology.LabelResourceType: ontology.ResourceTypeDisk,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor disk space utilization to prevent storage exhaustion",
 			Service:     "backend-service",

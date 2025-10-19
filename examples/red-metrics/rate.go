@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleRateSLO is a SLO that measures the request rate (requests per second) for an API service.
@@ -13,7 +14,17 @@ func ExampleRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "api-request-rate",
-			DisplayName: "API Request Rate"},
+			DisplayName: "API Request Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryThroughput,
+				ontology.LabelSeverity:   ontology.SeverityMedium,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelMetricType: ontology.MetricTypeRate,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor API request rate to ensure the service handles expected traffic volume",
 			Service:     "api-service",

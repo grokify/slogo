@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleErrorRateSLO is a SLO that measures the error rate of requests.
@@ -13,7 +14,17 @@ func ExampleErrorRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "api-error-rate",
-			DisplayName: "API Error Rate"},
+			DisplayName: "API Error Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelMetricType: ontology.MetricTypeErrors,
+			})},
 		v1.SLOSpec{
 			Description: "Track error rate to ensure service reliability - successful responses (2xx, 3xx) vs errors (4xx, 5xx)",
 			Service:     "api-service",

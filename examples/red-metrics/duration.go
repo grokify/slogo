@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDurationSLO is a SLO that measures request duration (latency).
@@ -13,7 +14,17 @@ func ExampleDurationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "api-latency",
-			DisplayName: "API Request Duration"},
+			DisplayName: "API Request Duration",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor request latency to ensure fast response times for users",
 			Service:     "api-service",
@@ -56,7 +67,17 @@ func ExampleDurationP99SLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "api-latency-p99",
-			DisplayName: "API P99 Duration"},
+			DisplayName: "API P99 Duration",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor P99 latency to catch tail latency issues",
 			Service:     "api-service",

@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleUserActivationSLO measures the percentage of new users who complete activation steps.
@@ -12,7 +13,19 @@ func ExampleUserActivationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "user-activation-rate",
-			DisplayName: "New User Activation Rate"},
+			DisplayName: "New User Activation Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeActivation,
+				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of new users who complete core activation steps within first 7 days",
 			Service:     "saas-crm-platform",

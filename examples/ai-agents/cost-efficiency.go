@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleTokenUsagePerTaskSLO measures token efficiency per completed task.
@@ -12,7 +13,18 @@ func ExampleTokenUsagePerTaskSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "token-usage-per-task",
-			DisplayName: "Token Usage Efficiency"},
+			DisplayName: "Token Usage Efficiency",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryCost,
+				ontology.LabelSeverity:   ontology.SeverityMedium,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor average token usage per completed task to ensure cost efficiency",
 			Service:     "ai-agent-platform",

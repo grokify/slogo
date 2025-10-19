@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDay7RetentionSLO measures 7-day user retention.
@@ -12,7 +13,19 @@ func ExampleDay7RetentionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "day7-retention",
-			DisplayName: "7-Day User Retention"},
+			DisplayName: "7-Day User Retention",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeRetention,
+				ontology.LabelJourneyStage: ontology.JourneyStageRetention,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who return on day 7 after signup",
 			Service:     "saas-crm-platform",

@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDailyActiveUsersSLO measures daily active users.
@@ -12,7 +13,18 @@ func ExampleDailyActiveUsersSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "daily-active-users",
-			DisplayName: "Daily Active Users (DAU)"},
+			DisplayName: "Daily Active Users (DAU)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track daily active users to monitor platform engagement",
 			Service:     "saas-crm-platform",
@@ -55,7 +67,18 @@ func ExampleMonthlyActiveUsersSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "monthly-active-users",
-			DisplayName: "Monthly Active Users (MAU)"},
+			DisplayName: "Monthly Active Users (MAU)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track monthly active users to monitor overall platform adoption",
 			Service:     "saas-crm-platform",
@@ -98,7 +121,19 @@ func ExampleDAUMAURatioSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "dau-mau-ratio",
-			DisplayName: "DAU/MAU Ratio (Stickiness)"},
+			DisplayName: "DAU/MAU Ratio (Stickiness)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeStickiness,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track DAU/MAU ratio to measure product stickiness and engagement frequency",
 			Service:     "saas-crm-platform",

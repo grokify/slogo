@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleAgentResponseQualitySLO measures the quality of agent responses based on user feedback.
@@ -12,7 +13,18 @@ func ExampleAgentResponseQualitySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-response-quality",
-			DisplayName: "AI Agent Response Quality"},
+			DisplayName: "AI Agent Response Quality",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
+			})},
 		v1.SLOSpec{
 			Description: "Ensure AI agents provide high-quality responses based on user satisfaction ratings",
 			Service:     "ai-agent-platform",

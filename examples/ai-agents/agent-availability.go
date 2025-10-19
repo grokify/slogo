@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleAgentAvailabilitySLO measures the availability of AI agent services for end users.
@@ -13,7 +14,17 @@ func ExampleAgentAvailabilitySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-availability",
-			DisplayName: "AI Agent Service Availability"},
+			DisplayName: "AI Agent Service Availability",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryAvailability,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+			})},
 		v1.SLOSpec{
 			Description: "Ensure AI agents are available when users need them - successful agent sessions vs total attempts",
 			Service:     "ai-agent-platform",
