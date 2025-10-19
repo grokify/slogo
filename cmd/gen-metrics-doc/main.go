@@ -6,28 +6,15 @@ import (
 	"sort"
 	"strings"
 
-	v1 "github.com/OpenSLO/go-sdk/pkg/openslo/v1"
 	"github.com/grokify/mogo/text/markdown"
 
-	aiagents "github.com/grokify/slogo/examples/ai-agents"
-	budgetingmethod "github.com/grokify/slogo/examples/budgeting-method"
-	redmetrics "github.com/grokify/slogo/examples/red-metrics"
-	saascrm "github.com/grokify/slogo/examples/saas-crm"
-	treatlowtraffic "github.com/grokify/slogo/examples/treat-low-traffic-as-equally-important"
-	usemetrics "github.com/grokify/slogo/examples/use-metrics"
+	"github.com/grokify/slogo/examples"
 	"github.com/grokify/slogo/ontology"
 )
 
 func main() {
 	// Collect SLOs from all directories
-	directories := map[string][]v1.SLO{
-		"ai-agents":                              getAIAgentsSLOs(),
-		"budgeting-method":                       getBudgetingMethodSLOs(),
-		"red-metrics":                            getREDMetricsSLOs(),
-		"saas-crm":                               getSaaSCRMSLOs(),
-		"treat-low-traffic-as-equally-important": getTreatLowTrafficSLOs(),
-		"use-metrics":                            getUSEMetricsSLOs(),
-	}
+	directories := examples.ExampleSLOsByDirectory()
 
 	// Get label definitions
 	labelDefs := ontology.GetLabelDefinitions()
@@ -47,19 +34,7 @@ func main() {
 	fmt.Fprintln(f)
 
 	// Get sorted label names
-	labelOrder := []string{
-		ontology.LabelFramework,
-		ontology.LabelLayer,
-		ontology.LabelScope,
-		ontology.LabelAudience,
-		ontology.LabelCategory,
-		ontology.LabelSeverity,
-		ontology.LabelTier,
-		ontology.LabelMetricType,
-		ontology.LabelResourceType,
-		ontology.LabelDomain,
-		ontology.LabelJourneyStage,
-	}
+	labelOrder := ontology.Labels()
 
 	// For each label type, create a table
 	for _, labelName := range labelOrder {
@@ -147,98 +122,4 @@ func formatValue(value string) string {
 		parts[i] = strings.Title(part)
 	}
 	return strings.Join(parts, " ")
-}
-
-func getAIAgentsSLOs() []v1.SLO {
-	return []v1.SLO{
-		aiagents.ExampleAgentAvailabilitySLO(),
-		aiagents.ExamplePerUserAgentAvailabilitySLO(),
-		aiagents.ExampleAgentResponseQualitySLO(),
-		aiagents.ExamplePerUserResponseQualitySLO(),
-		aiagents.ExampleAgentAccuracySLO(),
-		aiagents.ExampleAgentResponseTimeSLO(),
-		aiagents.ExamplePerUserResponseTimeSLO(),
-		aiagents.ExampleAgentFirstTokenLatencySLO(),
-		aiagents.ExampleTaskCompletionRateSLO(),
-		aiagents.ExamplePerUserTaskCompletionSLO(),
-		aiagents.ExampleTaskAbandonmentRateSLO(),
-		aiagents.ExampleMultiStepTaskSuccessSLO(),
-		aiagents.ExampleDailyActiveUsersSLO(),
-		aiagents.ExampleUserRetentionSLO(),
-		aiagents.ExampleSessionDurationSLO(),
-		aiagents.ExampleConversationTurnsSLO(),
-		aiagents.ExampleTokenUsagePerTaskSLO(),
-		aiagents.ExamplePerUserCostSLO(),
-		aiagents.ExampleCostPerSuccessfulTaskSLO(),
-		aiagents.ExampleCacheHitRateSLO(),
-	}
-}
-
-func getBudgetingMethodSLOs() []v1.SLO {
-	return []v1.SLO{
-		budgetingmethod.ExampleOccurencesSLO(),
-		budgetingmethod.ExampleAvailbilitySLO(),
-		budgetingmethod.ExampleRatioTimeSlicesSLO(),
-	}
-}
-
-func getREDMetricsSLOs() []v1.SLO {
-	return []v1.SLO{
-		redmetrics.ExampleRateSLO(),
-		redmetrics.ExampleErrorRateSLO(),
-		redmetrics.ExampleDurationSLO(),
-		redmetrics.ExampleDurationP99SLO(),
-		redmetrics.ExampleAvailabilitySLO(),
-	}
-}
-
-func getSaaSCRMSLOs() []v1.SLO {
-	return []v1.SLO{
-		saascrm.ExampleUserActivationSLO(),
-		saascrm.ExampleTimeToFirstValueSLO(),
-		saascrm.ExampleOnboardingCompletionSLO(),
-		saascrm.ExampleDailyActiveUsersSLO(),
-		saascrm.ExampleMonthlyActiveUsersSLO(),
-		saascrm.ExampleDAUMAURatioSLO(),
-		saascrm.ExampleWeeklyActiveUsersSLO(),
-		saascrm.ExampleDAUWAURatioSLO(),
-		saascrm.ExamplePowerUserRatioSLO(),
-		saascrm.ExampleDay7RetentionSLO(),
-		saascrm.ExampleDay30RetentionSLO(),
-		saascrm.ExampleChurnRateSLO(),
-		saascrm.ExampleResurrectionRateSLO(),
-		saascrm.ExampleCohortRetentionSLO(),
-		saascrm.ExampleContactManagementUsageSLO(),
-		saascrm.ExampleDealPipelineUsageSLO(),
-		saascrm.ExampleEmailIntegrationUsageSLO(),
-		saascrm.ExampleReportingUsageSLO(),
-		saascrm.ExampleMobileAppUsageSLO(),
-		saascrm.ExampleDealsCreatedSLO(),
-		saascrm.ExampleDealWinRateSLO(),
-		saascrm.ExampleSalesCycleLengthSLO(),
-		saascrm.ExampleContactCreationRateSLO(),
-		saascrm.ExampleEmailsSentPerUserSLO(),
-	}
-}
-
-func getTreatLowTrafficSLOs() []v1.SLO {
-	return []v1.SLO{
-		treatlowtraffic.ExampleLowTrafficSLO(),
-	}
-}
-
-func getUSEMetricsSLOs() []v1.SLO {
-	return []v1.SLO{
-		usemetrics.ExampleCPUUtilizationSLO(),
-		usemetrics.ExampleMemoryUtilizationSLO(),
-		usemetrics.ExampleDiskUtilizationSLO(),
-		usemetrics.ExampleCPUSaturationSLO(),
-		usemetrics.ExampleMemorySaturationSLO(),
-		usemetrics.ExampleDiskSaturationSLO(),
-		usemetrics.ExampleNetworkSaturationSLO(),
-		usemetrics.ExampleDiskErrorsSLO(),
-		usemetrics.ExampleNetworkErrorsSLO(),
-		usemetrics.ExampleMemoryErrorsSLO(),
-		usemetrics.ExampleCPUThrottlingErrorsSLO(),
-	}
 }
