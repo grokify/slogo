@@ -1,4 +1,4 @@
-# slogo
+# SLOGo - Go module for Service Level Objectives (SLOs)
 
 [![Build Status][build-status-svg]][build-status-url]
 [![Lint Status][lint-status-svg]][lint-status-url]
@@ -202,11 +202,6 @@ slogo/
 ├── datadog/          # Datadog integration utilities
 └── cmd/parse/        # CLI tools for parsing SLO files
 ```
-
-## Dependencies
-
-- [github.com/OpenSLO/go-sdk](https://github.com/OpenSLO/go-sdk) - OpenSLO Go SDK
-- [github.com/grokify/mogo](https://github.com/grokify/mogo) - Go utilities
 
 ## License
 
