@@ -4,7 +4,7 @@ run:
 linters:
   enable:
     - dogsled
-    - dupl
+    # - dupl  # Disabled due to expected duplicates in examples directory
     - gosec
     - misspell
     - nakedret
@@ -27,6 +27,9 @@ linters:
     staticcheck:
       checks:
         - "-QF1008" # Disable the "could remove embedded field" check
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
 formatters:
   enable:
     - gofmt
