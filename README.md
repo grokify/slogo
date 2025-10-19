@@ -1,4 +1,4 @@
-# SLOGo - Go module for Service Level Objectives (SLOs)
+# SLOGo - Go for Service Level Objectives (SLOs)
 
 [![Build Status][build-status-svg]][build-status-url]
 [![Lint Status][lint-status-svg]][lint-status-url]
