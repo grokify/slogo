@@ -94,11 +94,11 @@ const (
 
 // Domain provides domain-specific categorization
 const (
-	DomainAIML      = "ai-ml"      // AI/ML specific metrics
-	DomainCRM       = "crm"        // CRM specific metrics
-	DomainSaaS      = "saas"       // SaaS specific metrics
-	DomainEcommerce = "ecommerce"  // E-commerce metrics
-	DomainFintech   = "fintech"    // Financial technology metrics
+	DomainAIML      = "ai-ml"     // AI/ML specific metrics
+	DomainCRM       = "crm"       // CRM specific metrics
+	DomainSaaS      = "saas"      // SaaS specific metrics
+	DomainEcommerce = "ecommerce" // E-commerce metrics
+	DomainFintech   = "fintech"   // Financial technology metrics
 )
 
 // JourneyStage indicates where in the user journey this metric applies
@@ -127,10 +127,10 @@ const (
 	LabelCategory     = "category"
 	LabelSeverity     = "severity"
 	LabelTier         = "tier"
-	LabelMetricType   = "metric_type"
-	LabelResourceType = "resource_type"
+	LabelMetricType   = "metric-type"
+	LabelResourceType = "resource-type"
 	LabelDomain       = "domain"
-	LabelJourneyStage = "journey_stage"
+	LabelJourneyStage = "journey-stage"
 	LabelService      = "service"
 	LabelTeam         = "team"
 	LabelEnvironment  = "environment"
