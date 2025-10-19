@@ -135,3 +135,20 @@ const (
 	LabelTeam         = "team"
 	LabelEnvironment  = "environment"
 )
+
+func Labels() []string {
+	// Get sorted label names
+	return []string{
+		LabelFramework,
+		LabelLayer,
+		LabelScope,
+		LabelAudience,
+		LabelCategory,
+		LabelSeverity,
+		LabelTier,
+		LabelMetricType,
+		LabelResourceType,
+		LabelDomain,
+		LabelJourneyStage,
+	}
+}
