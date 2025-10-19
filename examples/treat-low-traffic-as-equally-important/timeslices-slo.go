@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleLowTrafficSLO is a SLO that reats low traffic as equally important.
@@ -12,7 +13,17 @@ func ExampleLowTrafficSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "service-availability",
-			DisplayName: "SLO for this important service"},
+			DisplayName: "SLO for this important service",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryAvailability,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelMetricType: ontology.MetricTypeAvailability,
+			})},
 		v1.SLOSpec{
 			Description: "SLO to see if we are above our SLA and to react before.",
 			Service:     "web-availability",

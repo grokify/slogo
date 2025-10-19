@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleOccurencesSLO is a SLO that measures the time of searching for an item in an online shop.
@@ -12,7 +13,18 @@ func ExampleOccurencesSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "search-slo",
-			DisplayName: "Searching time"},
+			DisplayName: "Searching time",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainEcommerce,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Regardless of the number of parallel searches it never should be more than 500ms.",
 			Service:     "web-shop",

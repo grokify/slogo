@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleRatioTimeSlicesSLO is a SLO that compares success requests with response 2xx to total requests to the main page of our site.
@@ -12,7 +13,18 @@ func ExampleRatioTimeSlicesSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "main-page",
-			DisplayName: "Main page availability"},
+			DisplayName: "Main page availability",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryAvailability,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainEcommerce,
+				ontology.LabelMetricType: ontology.MetricTypeAvailability,
+			})},
 		v1.SLOSpec{
 			Description: "Our main page should be available always",
 			Service:     "web-shop",
