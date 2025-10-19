@@ -181,17 +181,61 @@ func PrintReport(w io.Writer, report *MetricReport) {
 
 		// Sort bin names
 		binNames := dist.Histogram.BinNames()
-		sort.Strings(binNames)
+
+		// Create a map of display values to original bin names and counts
+		type valueCount struct {
+			displayValue string
+			binName      string
+			count        int
+		}
+		var values []valueCount
 
 		for _, binName := range binNames {
 			count, _ := dist.Histogram.BinValue(binName)
-			tableBuilder.WriteString(fmt.Sprintf("| %s | %d |\n", binName, count))
+			displayValue := binName
+
+			// Prefix category values with framework name
+			if labelName == LabelCategory {
+				displayValue = getCategoryWithFramework(binName)
+			}
+
+			values = append(values, valueCount{
+				displayValue: displayValue,
+				binName:      binName,
+				count:        count,
+			})
+		}
+
+		// Sort by display value
+		sort.Slice(values, func(i, j int) bool {
+			return values[i].displayValue < values[j].displayValue
+		})
+
+		for _, v := range values {
+			tableBuilder.WriteString(fmt.Sprintf("| %s | %d |\n", v.displayValue, v.count))
 		}
 
 		// Align the table and write it
 		alignedTable := markdown.TableAlign(tableBuilder.String(), 1)
 		fmt.Fprint(w, alignedTable)
 		fmt.Fprintln(w)
+	}
+}
+
+// getCategoryWithFramework returns the category name prefixed with its associated framework
+func getCategoryWithFramework(category string) string {
+	switch category {
+	// RED framework categories
+	case CategoryAvailability, CategoryLatency, CategoryThroughput:
+		return "RED: " + category
+	// USE framework categories
+	case CategoryResource:
+		return "USE: " + category
+	// Custom/Business categories
+	case CategoryQuality, CategoryEngagement, CategoryConversion, CategoryCost, CategorySecurity, CategoryCompliance:
+		return "Custom: " + category
+	default:
+		return category
 	}
 }
 
