@@ -18,10 +18,10 @@ func ExampleTokenUsagePerTaskSLO() v1.SLO {
 				ontology.LabelFramework:  ontology.FrameworkCustom,
 				ontology.LabelLayer:      ontology.LayerBusiness,
 				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
-				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelAudience:   ontology.AudienceExecutive,
 				ontology.LabelCategory:   ontology.CategoryCost,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
-				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelTier:       ontology.TierP2,
 				ontology.LabelDomain:     ontology.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
 			})},
@@ -67,7 +67,18 @@ func ExamplePerUserCostSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "per-user-cost",
-			DisplayName: "Per-User Cost Efficiency"},
+			DisplayName: "Per-User Cost Efficiency",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceExecutive,
+				ontology.LabelCategory:   ontology.CategoryCost,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Track average cost per user to ensure sustainable economics",
 			Service:     "ai-agent-platform",
@@ -120,7 +131,18 @@ func ExampleCostPerSuccessfulTaskSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cost-per-successful-task",
-			DisplayName: "Cost per Successful Task"},
+			DisplayName: "Cost per Successful Task",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceExecutive,
+				ontology.LabelCategory:   ontology.CategoryCost,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor cost per successfully completed task to optimize ROI",
 			Service:     "ai-agent-platform",
@@ -163,7 +185,18 @@ func ExampleCacheHitRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cache-hit-rate",
-			DisplayName: "Agent Response Cache Hit Rate"},
+			DisplayName: "Agent Response Cache Hit Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceExecutive,
+				ontology.LabelCategory:   ontology.CategoryCost,
+				ontology.LabelSeverity:   ontology.SeverityMedium,
+				ontology.LabelTier:       ontology.TierP2,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Track cache hit rate to reduce costs and improve response times",
 			Service:     "ai-agent-platform",

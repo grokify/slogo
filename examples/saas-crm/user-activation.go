@@ -78,7 +78,19 @@ func ExampleTimeToFirstValueSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "time-to-first-value",
-			DisplayName: "Time to First Value"},
+			DisplayName: "Time to First Value",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeActivation,
+				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+			})},
 		v1.SLOSpec{
 			Description: "Track how quickly new users create their first contact or deal",
 			Service:     "saas-crm-platform",
@@ -131,7 +143,19 @@ func ExampleOnboardingCompletionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "onboarding-completion",
-			DisplayName: "Onboarding Completion Rate"},
+			DisplayName: "Onboarding Completion Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeActivation,
+				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who complete the full onboarding checklist",
 			Service:     "saas-crm-platform",

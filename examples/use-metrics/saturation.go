@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleCPUSaturationSLO is a SLO that measures CPU saturation via load average.
@@ -13,7 +14,18 @@ func ExampleCPUSaturationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cpu-saturation",
-			DisplayName: "CPU Saturation (Load Average)"},
+			DisplayName: "CPU Saturation (Load Average)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeSaturation,
+				ontology.LabelResourceType: ontology.ResourceTypeCPU,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor CPU saturation via load average to detect queuing and resource contention",
 			Service:     "backend-service",
@@ -56,7 +68,18 @@ func ExampleMemorySaturationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "memory-saturation",
-			DisplayName: "Memory Saturation (Swap Usage)"},
+			DisplayName: "Memory Saturation (Swap Usage)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeSaturation,
+				ontology.LabelResourceType: ontology.ResourceTypeMemory,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor memory saturation via swap usage to detect memory pressure",
 			Service:     "backend-service",
@@ -99,7 +122,18 @@ func ExampleDiskSaturationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "disk-saturation",
-			DisplayName: "Disk I/O Saturation"},
+			DisplayName: "Disk I/O Saturation",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelMetricType:   ontology.MetricTypeSaturation,
+				ontology.LabelResourceType: ontology.ResourceTypeDisk,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor disk I/O saturation to detect disk bottlenecks and queuing",
 			Service:     "backend-service",
@@ -142,7 +176,18 @@ func ExampleNetworkSaturationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "network-saturation",
-			DisplayName: "Network Saturation"},
+			DisplayName: "Network Saturation",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelMetricType:   ontology.MetricTypeSaturation,
+				ontology.LabelResourceType: ontology.ResourceTypeNetwork,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor network bandwidth saturation to detect network congestion",
 			Service:     "backend-service",

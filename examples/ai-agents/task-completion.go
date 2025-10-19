@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleTaskCompletionRateSLO measures how often agents successfully complete user tasks.
@@ -12,7 +13,18 @@ func ExampleTaskCompletionRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "task-completion-rate",
-			DisplayName: "Agent Task Completion Rate"},
+			DisplayName: "Agent Task Completion Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Track the percentage of user tasks that agents successfully complete without errors or abandonment",
 			Service:     "ai-agent-platform",
@@ -65,7 +77,18 @@ func ExamplePerUserTaskCompletionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "per-user-task-completion",
-			DisplayName: "Per-User Task Completion Rate"},
+			DisplayName: "Per-User Task Completion Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor task completion per user to identify users struggling with the agent",
 			Service:     "ai-agent-platform",
@@ -118,7 +141,18 @@ func ExampleTaskAbandonmentRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "task-abandonment-rate",
-			DisplayName: "Agent Task Abandonment Rate"},
+			DisplayName: "Agent Task Abandonment Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Track task abandonment rate to identify user frustration and agent limitations",
 			Service:     "ai-agent-platform",
@@ -171,7 +205,18 @@ func ExampleMultiStepTaskSuccessSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "multi-step-task-success",
-			DisplayName: "Multi-Step Task Success Rate"},
+			DisplayName: "Multi-Step Task Success Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+			})},
 		v1.SLOSpec{
 			Description: "Track success rate for complex tasks requiring multiple agent actions",
 			Service:     "ai-agent-platform",

@@ -78,7 +78,18 @@ func ExamplePerUserAgentAvailabilitySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "per-user-agent-availability",
-			DisplayName: "Per-User Agent Availability"},
+			DisplayName: "Per-User Agent Availability",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeErrors,
+			})},
 		v1.SLOSpec{
 			Description: "Track agent availability per user to ensure consistent service across all customers",
 			Service:     "ai-agent-platform",

@@ -78,7 +78,19 @@ func ExampleDay30RetentionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "day30-retention",
-			DisplayName: "30-Day User Retention"},
+			DisplayName: "30-Day User Retention",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeRetention,
+				ontology.LabelJourneyStage: ontology.JourneyStageRetention,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who return on day 30 after signup",
 			Service:     "saas-crm-platform",
@@ -131,7 +143,19 @@ func ExampleChurnRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "monthly-churn-rate",
-			DisplayName: "Monthly Customer Churn Rate"},
+			DisplayName: "Monthly Customer Churn Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeRetention,
+				ontology.LabelJourneyStage: ontology.JourneyStageRetention,
+			})},
 		v1.SLOSpec{
 			Description: "Track monthly churn rate to ensure retention goals are met",
 			Service:     "saas-crm-platform",
@@ -174,7 +198,19 @@ func ExampleResurrectionRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "user-resurrection-rate",
-			DisplayName: "User Resurrection Rate"},
+			DisplayName: "User Resurrection Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeRetention,
+				ontology.LabelJourneyStage: ontology.JourneyStageRetention,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of previously inactive users (30+ days) who return",
 			Service:     "saas-crm-platform",
@@ -227,7 +263,19 @@ func ExampleCohortRetentionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cohort-retention-90d",
-			DisplayName: "90-Day Cohort Retention"},
+			DisplayName: "90-Day Cohort Retention",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeRetention,
+				ontology.LabelJourneyStage: ontology.JourneyStageRetention,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users from each cohort still active after 90 days",
 			Service:     "saas-crm-platform",

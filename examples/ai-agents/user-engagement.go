@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDailyActiveUsersSLO measures daily active users engaging with agents.
@@ -12,7 +13,17 @@ func ExampleDailyActiveUsersSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "daily-active-users",
-			DisplayName: "Daily Active Users"},
+			DisplayName: "Daily Active Users",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework: ontology.FrameworkCustom,
+				ontology.LabelLayer:     ontology.LayerBusiness,
+				ontology.LabelScope:     ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:  ontology.AudienceProduct,
+				ontology.LabelCategory:  ontology.CategoryEngagement,
+				ontology.LabelSeverity:  ontology.SeverityHigh,
+				ontology.LabelTier:      ontology.TierP1,
+				ontology.LabelDomain:    ontology.DomainAIML,
+			})},
 		v1.SLOSpec{
 			Description: "Track daily active users to monitor platform adoption and engagement",
 			Service:     "ai-agent-platform",
@@ -55,7 +66,17 @@ func ExampleUserRetentionSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "user-retention",
-			DisplayName: "7-Day User Retention"},
+			DisplayName: "7-Day User Retention",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework: ontology.FrameworkCustom,
+				ontology.LabelLayer:     ontology.LayerBusiness,
+				ontology.LabelScope:     ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:  ontology.AudienceProduct,
+				ontology.LabelCategory:  ontology.CategoryEngagement,
+				ontology.LabelSeverity:  ontology.SeverityCritical,
+				ontology.LabelTier:      ontology.TierP0,
+				ontology.LabelDomain:    ontology.DomainAIML,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who return within 7 days of first use",
 			Service:     "ai-agent-platform",
@@ -108,7 +129,17 @@ func ExampleSessionDurationSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "session-duration",
-			DisplayName: "User Session Duration"},
+			DisplayName: "User Session Duration",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework: ontology.FrameworkCustom,
+				ontology.LabelLayer:     ontology.LayerBusiness,
+				ontology.LabelScope:     ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:  ontology.AudienceProduct,
+				ontology.LabelCategory:  ontology.CategoryEngagement,
+				ontology.LabelSeverity:  ontology.SeverityMedium,
+				ontology.LabelTier:      ontology.TierP2,
+				ontology.LabelDomain:    ontology.DomainAIML,
+			})},
 		v1.SLOSpec{
 			Description: "Track average session duration to measure user engagement depth",
 			Service:     "ai-agent-platform",
@@ -151,7 +182,17 @@ func ExampleConversationTurnsSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "conversation-turns",
-			DisplayName: "Agent Conversation Depth"},
+			DisplayName: "Agent Conversation Depth",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework: ontology.FrameworkCustom,
+				ontology.LabelLayer:     ontology.LayerBusiness,
+				ontology.LabelScope:     ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:  ontology.AudienceProduct,
+				ontology.LabelCategory:  ontology.CategoryEngagement,
+				ontology.LabelSeverity:  ontology.SeverityMedium,
+				ontology.LabelTier:      ontology.TierP2,
+				ontology.LabelDomain:    ontology.DomainAIML,
+			})},
 		v1.SLOSpec{
 			Description: "Track average conversation turns to measure engagement and agent helpfulness",
 			Service:     "ai-agent-platform",

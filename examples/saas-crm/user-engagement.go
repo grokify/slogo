@@ -176,7 +176,18 @@ func ExampleWeeklyActiveUsersSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "weekly-active-users",
-			DisplayName: "Weekly Active Users (WAU)"},
+			DisplayName: "Weekly Active Users (WAU)",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track weekly active users for mid-range engagement metrics",
 			Service:     "saas-crm-platform",
@@ -219,7 +230,19 @@ func ExampleDAUWAURatioSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "dau-wau-ratio",
-			DisplayName: "DAU/WAU Ratio"},
+			DisplayName: "DAU/WAU Ratio",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeStickiness,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track DAU/WAU ratio to measure weekly engagement intensity",
 			Service:     "saas-crm-platform",
@@ -262,7 +285,19 @@ func ExamplePowerUserRatioSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "power-user-ratio",
-			DisplayName: "Power User Ratio"},
+			DisplayName: "Power User Ratio",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeStickiness,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who are highly engaged (active 20+ days per month)",
 			Service:     "saas-crm-platform",

@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleContactManagementUsageSLO measures adoption of contact management features.
@@ -12,7 +13,18 @@ func ExampleContactManagementUsageSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "contact-management-usage",
-			DisplayName: "Contact Management Feature Usage"},
+			DisplayName: "Contact Management Feature Usage",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP2,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeAdoption,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who regularly use contact management features",
 			Service:     "saas-crm-platform",
@@ -65,7 +77,18 @@ func ExampleDealPipelineUsageSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "deal-pipeline-usage",
-			DisplayName: "Deal Pipeline Feature Usage"},
+			DisplayName: "Deal Pipeline Feature Usage",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP2,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeAdoption,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users managing deals in the pipeline",
 			Service:     "saas-crm-platform",
@@ -118,7 +141,18 @@ func ExampleEmailIntegrationUsageSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "email-integration-usage",
-			DisplayName: "Email Integration Usage"},
+			DisplayName: "Email Integration Usage",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP2,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeAdoption,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users with active email integration",
 			Service:     "saas-crm-platform",
@@ -171,7 +205,18 @@ func ExampleReportingUsageSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "reporting-usage",
-			DisplayName: "Reporting & Analytics Usage"},
+			DisplayName: "Reporting & Analytics Usage",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP2,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeAdoption,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who view reports or dashboards",
 			Service:     "saas-crm-platform",
@@ -224,7 +269,18 @@ func ExampleMobileAppUsageSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "mobile-app-usage",
-			DisplayName: "Mobile App Usage"},
+			DisplayName: "Mobile App Usage",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityMedium,
+				ontology.LabelTier:         ontology.TierP2,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelMetricType:   ontology.MetricTypeAdoption,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who use the mobile app",
 			Service:     "saas-crm-platform",

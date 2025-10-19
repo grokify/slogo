@@ -77,7 +77,18 @@ func ExamplePerUserResponseQualitySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "per-user-response-quality",
-			DisplayName: "Per-User Response Quality"},
+			DisplayName: "Per-User Response Quality",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor response quality per user to identify users with poor experience",
 			Service:     "ai-agent-platform",
@@ -130,7 +141,18 @@ func ExampleAgentAccuracySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-accuracy",
-			DisplayName: "AI Agent Response Accuracy"},
+			DisplayName: "AI Agent Response Accuracy",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkCustom,
+				ontology.LabelLayer:      ontology.LayerBusiness,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceProduct,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
+			})},
 		v1.SLOSpec{
 			Description: "Track the accuracy of agent responses by measuring hallucination rate and factual correctness",
 			Service:     "ai-agent-platform",

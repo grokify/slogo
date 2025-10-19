@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDealsCreatedSLO measures the rate of deal creation.
@@ -12,7 +13,18 @@ func ExampleDealsCreatedSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "deals-created-rate",
-			DisplayName: "Deal Creation Rate"},
+			DisplayName: "Deal Creation Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceExecutive,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageRevenue,
+			})},
 		v1.SLOSpec{
 			Description: "Track the rate of new deals being created in the system",
 			Service:     "saas-crm-platform",
@@ -55,7 +67,18 @@ func ExampleDealWinRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "deal-win-rate",
-			DisplayName: "Deal Win Rate"},
+			DisplayName: "Deal Win Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceExecutive,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageRevenue,
+			})},
 		v1.SLOSpec{
 			Description: "Track percentage of closed deals that are won (vs lost)",
 			Service:     "saas-crm-platform",
@@ -108,7 +131,18 @@ func ExampleSalesCycleLengthSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "sales-cycle-length",
-			DisplayName: "Average Sales Cycle Length"},
+			DisplayName: "Average Sales Cycle Length",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceExecutive,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageRevenue,
+			})},
 		v1.SLOSpec{
 			Description: "Track average time from deal creation to close (won or lost)",
 			Service:     "saas-crm-platform",
@@ -151,7 +185,18 @@ func ExampleContactCreationRateSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "contact-creation-rate",
-			DisplayName: "Contact Creation Rate"},
+			DisplayName: "Contact Creation Rate",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryConversion,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track the rate of new contacts being added to the CRM",
 			Service:     "saas-crm-platform",
@@ -194,7 +239,18 @@ func ExampleEmailsSentPerUserSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "emails-sent-per-user",
-			DisplayName: "Emails Sent Per Active User"},
+			DisplayName: "Emails Sent Per Active User",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkCustom,
+				ontology.LabelLayer:        ontology.LayerBusiness,
+				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:     ontology.AudienceProduct,
+				ontology.LabelCategory:     ontology.CategoryEngagement,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelDomain:       ontology.DomainCRM,
+				ontology.LabelJourneyStage: ontology.JourneyStageEngagement,
+			})},
 		v1.SLOSpec{
 			Description: "Track average number of emails sent per active user to measure engagement",
 			Service:     "saas-crm-platform",

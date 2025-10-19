@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
 // ExampleDiskErrorsSLO is a SLO that measures disk I/O errors.
@@ -13,7 +14,18 @@ func ExampleDiskErrorsSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "disk-errors",
-			DisplayName: "Disk I/O Errors"},
+			DisplayName: "Disk I/O Errors",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeErrors,
+				ontology.LabelResourceType: ontology.ResourceTypeDisk,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor disk I/O errors to detect failing or degraded storage devices",
 			Service:     "backend-service",
@@ -56,7 +68,18 @@ func ExampleNetworkErrorsSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "network-errors",
-			DisplayName: "Network Errors"},
+			DisplayName: "Network Errors",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeErrors,
+				ontology.LabelResourceType: ontology.ResourceTypeNetwork,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor network errors including packet drops and transmission errors",
 			Service:     "backend-service",
@@ -109,7 +132,18 @@ func ExampleMemoryErrorsSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "memory-errors",
-			DisplayName: "Memory ECC Errors"},
+			DisplayName: "Memory ECC Errors",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityCritical,
+				ontology.LabelTier:         ontology.TierP0,
+				ontology.LabelMetricType:   ontology.MetricTypeErrors,
+				ontology.LabelResourceType: ontology.ResourceTypeMemory,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor memory ECC errors to detect failing or degraded RAM modules",
 			Service:     "backend-service",
@@ -152,7 +186,18 @@ func ExampleCPUThrottlingErrorsSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "cpu-throttling",
-			DisplayName: "CPU Throttling Events"},
+			DisplayName: "CPU Throttling Events",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:    ontology.FrameworkUSE,
+				ontology.LabelLayer:        ontology.LayerInfrastructure,
+				ontology.LabelScope:        ontology.ScopeInternal,
+				ontology.LabelAudience:     ontology.AudienceSRE,
+				ontology.LabelCategory:     ontology.CategoryResource,
+				ontology.LabelSeverity:     ontology.SeverityHigh,
+				ontology.LabelTier:         ontology.TierP1,
+				ontology.LabelMetricType:   ontology.MetricTypeErrors,
+				ontology.LabelResourceType: ontology.ResourceTypeCPU,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor CPU throttling events in containerized environments to detect resource constraints",
 			Service:     "backend-service",
