@@ -5,14 +5,26 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontology"
 )
 
-// ExampleAgentResponseTimeSLO measures the response time for agent interactions.
+// ExampleAgentResponseTimeSLO measures the response time (duration) for agent interactions.
 func ExampleAgentResponseTimeSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-response-time",
-			DisplayName: "AI Agent Response Time"},
+			DisplayName: "AI Agent Response Time",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Ensure AI agents respond quickly to user queries for good user experience",
 			Service:     "ai-agent-platform",
@@ -50,12 +62,23 @@ func ExampleAgentResponseTimeSLO() v1.SLO {
 	)
 }
 
-// ExamplePerUserResponseTimeSLO tracks response time on a per-user basis.
+// ExamplePerUserResponseTimeSLO tracks response time (duration) on a per-user basis.
 func ExamplePerUserResponseTimeSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "per-user-response-time",
-			DisplayName: "Per-User Response Time"},
+			DisplayName: "Per-User Response Time",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Monitor response time per user to ensure consistent performance",
 			Service:     "ai-agent-platform",
@@ -103,12 +126,23 @@ func ExamplePerUserResponseTimeSLO() v1.SLO {
 	)
 }
 
-// ExampleAgentFirstTokenLatencySLO measures time to first token for streaming responses.
+// ExampleAgentFirstTokenLatencySLO measures time to first token (duration) for streaming responses.
 func ExampleAgentFirstTokenLatencySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-first-token-latency",
-			DisplayName: "AI Agent First Token Latency"},
+			DisplayName: "AI Agent First Token Latency",
+			Labels: ontology.NewLabels(map[string]string{
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryLatency,
+				ontology.LabelSeverity:   ontology.SeverityHigh,
+				ontology.LabelTier:       ontology.TierP1,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeDuration,
+			})},
 		v1.SLOSpec{
 			Description: "Track time to first token in streaming responses for perceived responsiveness",
 			Service:     "ai-agent-platform",

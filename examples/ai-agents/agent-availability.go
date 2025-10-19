@@ -8,22 +8,23 @@ import (
 	"github.com/grokify/slogo/ontology"
 )
 
-// ExampleAgentAvailabilitySLO measures the availability of AI agent services for end users.
-// This tracks whether users can successfully start and interact with AI agents.
+// ExampleAgentAvailabilitySLO measures the error rate of AI agent services for end users.
+// This tracks whether users can successfully start and interact with AI agents (success vs errors).
 func ExampleAgentAvailabilitySLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "agent-availability",
 			DisplayName: "AI Agent Service Availability",
 			Labels: ontology.NewLabels(map[string]string{
-				ontology.LabelFramework: ontology.FrameworkCustom,
-				ontology.LabelLayer:     ontology.LayerBusiness,
-				ontology.LabelScope:     ontology.ScopeCustomerFacing,
-				ontology.LabelAudience:  ontology.AudienceProduct,
-				ontology.LabelCategory:  ontology.CategoryAvailability,
-				ontology.LabelSeverity:  ontology.SeverityCritical,
-				ontology.LabelTier:      ontology.TierP0,
-				ontology.LabelDomain:    ontology.DomainAIML,
+				ontology.LabelFramework:  ontology.FrameworkRED,
+				ontology.LabelLayer:      ontology.LayerService,
+				ontology.LabelScope:      ontology.ScopeCustomerFacing,
+				ontology.LabelAudience:   ontology.AudienceSRE,
+				ontology.LabelCategory:   ontology.CategoryQuality,
+				ontology.LabelSeverity:   ontology.SeverityCritical,
+				ontology.LabelTier:       ontology.TierP0,
+				ontology.LabelDomain:     ontology.DomainAIML,
+				ontology.LabelMetricType: ontology.MetricTypeErrors,
 			})},
 		v1.SLOSpec{
 			Description: "Ensure AI agents are available when users need them - successful agent sessions vs total attempts",
