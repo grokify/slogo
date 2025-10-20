@@ -39,12 +39,12 @@ func AnalyzeLabels(directory string, slos []v1.SLO) *MetricReport {
 	// Initialize all label distributions with zero counts
 	for labelName, possibleValues := range labelDefs {
 		hist := histogram.Histogram{
-			Name: labelName,
-			Bins: make(map[string]int),
+			Name:  labelName,
+			Items: make(map[string]int),
 		}
 		// Initialize all possible values with 0
 		for _, value := range possibleValues {
-			hist.Bins[value] = 0
+			hist.Items[value] = 0
 		}
 		report.LabelDistributions[labelName] = &LabelDistribution{
 			LabelName:    labelName,
