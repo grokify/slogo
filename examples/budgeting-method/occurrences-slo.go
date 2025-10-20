@@ -9,7 +9,7 @@ import (
 )
 
 // ExampleOccurencesSLO is a SLO that measures the time of searching for an item in an online shop.
-func ExampleOccurencesSLO() v1.SLO {
+func ExampleOccurrencesSLO() v1.SLO {
 	return v1.NewSLO(
 		v1.Metadata{
 			Name:        "search-slo",

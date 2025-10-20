@@ -7,7 +7,7 @@ import (
 func SLOs() []v1.SLO {
 	return []v1.SLO{
 		ExampleAvailbilitySLO(),
-		ExampleOccurencesSLO(),
+		ExampleOccurrencesSLO(),
 		ExampleRatioTimeSlicesSLO(),
 	}
 }
@@ -15,7 +15,7 @@ func SLOs() []v1.SLO {
 func SLOsBySetSlug() map[string][]v1.SLO {
 	return map[string][]v1.SLO{
 		"occurences-slo": {
-			ExampleOccurencesSLO()},
+			ExampleOccurrencesSLO()},
 		"ratio-timeslices": {
 			ExampleRatioTimeSlicesSLO()},
 		"timeslices-slo": {
