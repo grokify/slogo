@@ -37,3 +37,37 @@ func SLOs() []v1.SLO {
 		ExampleCohortRetentionSLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"business-outcomes": {
+			ExampleDealsCreatedSLO(),
+			ExampleDealWinRateSLO(),
+			ExampleSalesCycleLengthSLO(),
+			ExampleContactCreationRateSLO(),
+			ExampleEmailsSentPerUserSLO()},
+		"feature-adoption": {
+			ExampleContactManagementUsageSLO(),
+			ExampleDealPipelineUsageSLO(),
+			ExampleEmailIntegrationUsageSLO(),
+			ExampleReportingUsageSLO(),
+			ExampleMobileAppUsageSLO()},
+		"user-activation": {
+			ExampleUserActivationSLO(),
+			ExampleTimeToFirstValueSLO(),
+			ExampleOnboardingCompletionSLO()},
+		"user-engagement": {
+			ExampleDailyActiveUsersSLO(),
+			ExampleMonthlyActiveUsersSLO(),
+			ExampleDAUMAURatioSLO(),
+			ExampleWeeklyActiveUsersSLO(),
+			ExampleDAUWAURatioSLO(),
+			ExamplePowerUserRatioSLO()},
+		"user-retention": {
+			ExampleDay7RetentionSLO(),
+			ExampleDay30RetentionSLO(),
+			ExampleChurnRateSLO(),
+			ExampleResurrectionRateSLO(),
+			ExampleCohortRetentionSLO()},
+	}
+}

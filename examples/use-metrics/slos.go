@@ -22,3 +22,22 @@ func SLOs() []v1.SLO {
 		ExampleCPUThrottlingErrorsSLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"errors": {
+			ExampleDiskErrorsSLO(),
+			ExampleNetworkErrorsSLO(),
+			ExampleMemoryErrorsSLO(),
+			ExampleCPUThrottlingErrorsSLO()},
+		"saturation": {
+			ExampleCPUSaturationSLO(),
+			ExampleMemorySaturationSLO(),
+			ExampleDiskSaturationSLO(),
+			ExampleNetworkSaturationSLO()},
+		"utilization": {
+			ExampleCPUUtilizationSLO(),
+			ExampleMemoryUtilizationSLO(),
+			ExampleDiskUtilizationSLO()},
+	}
+}

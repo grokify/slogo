@@ -34,3 +34,34 @@ func SLOs() []v1.SLO {
 		ExampleCacheHitRateSLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"agent-availability": {
+			ExampleAgentAvailabilitySLO(),
+			ExamplePerUserAgentAvailabilitySLO()},
+		"cost-efficiency": {
+			ExampleTokenUsagePerTaskSLO(),
+			ExamplePerUserCostSLO(),
+			ExampleCostPerSuccessfulTaskSLO(),
+			ExampleCacheHitRateSLO()},
+		"response-quality": {
+			ExampleAgentResponseQualitySLO(),
+			ExamplePerUserResponseQualitySLO(),
+			ExampleAgentAccuracySLO()},
+		"response-time": {
+			ExampleAgentResponseTimeSLO(),
+			ExamplePerUserResponseTimeSLO(),
+			ExampleAgentFirstTokenLatencySLO()},
+		"task-completion": {
+			ExampleTaskCompletionRateSLO(),
+			ExamplePerUserTaskCompletionSLO(),
+			ExampleTaskAbandonmentRateSLO(),
+			ExampleMultiStepTaskSuccessSLO()},
+		"user-engagement": {
+			ExampleDailyActiveUsersSLO(),
+			ExampleUserRetentionSLO(),
+			ExampleSessionDurationSLO(),
+			ExampleConversationTurnsSLO()},
+	}
+}

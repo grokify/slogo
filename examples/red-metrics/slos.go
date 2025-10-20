@@ -11,3 +11,17 @@ func SLOs() []v1.SLO {
 		ExampleAvailabilitySLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"availability": {
+			ExampleAvailabilitySLO()},
+		"duration": {
+			ExampleDurationSLO(),
+			ExampleDurationP99SLO()},
+		"error": {
+			ExampleErrorRateSLO()},
+		"rate": {
+			ExampleRateSLO()},
+	}
+}

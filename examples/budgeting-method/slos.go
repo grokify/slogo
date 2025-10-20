@@ -11,3 +11,14 @@ func SLOs() []v1.SLO {
 		ExampleRatioTimeSlicesSLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"occurences-slo": {
+			ExampleOccurencesSLO()},
+		"ratio-timeslices": {
+			ExampleRatioTimeSlicesSLO()},
+		"timeslices-slo": {
+			ExampleAvailbilitySLO()},
+	}
+}

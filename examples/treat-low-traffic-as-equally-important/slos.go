@@ -9,3 +9,10 @@ func SLOs() []v1.SLO {
 		ExampleLowTrafficSLO(),
 	}
 }
+
+func SLOsBySetSlug() map[string][]v1.SLO {
+	return map[string][]v1.SLO{
+		"time-slices": {
+			ExampleLowTrafficSLO()},
+	}
+}
