@@ -3,7 +3,6 @@ package ontology
 import (
 	"fmt"
 	"io"
-	"strings"
 
 	v1 "github.com/OpenSLO/go-sdk/pkg/openslo/v1"
 	"github.com/grokify/gocharts/v2/data/histogram"
@@ -57,16 +56,8 @@ func WriteSLOSetsReport(w io.Writer, slos map[string][]v1.SLO) error {
 
 	hsetsLabelSetValue.UpdateSetOrders(labelDefs)
 
-	var sb strings.Builder
-	err := hsetsLabelSetValue.Markdown(&sb, "## ", "set name", true, &histogram.SetTablePivotOpts{
+	return hsetsLabelSetValue.Markdown(w, "## ", "set name", true, &histogram.SetTablePivotOpts{
 		ColTotalRight:  true,
 		RowTotalBottom: true,
 	})
-	if err != nil {
-		return err
-	}
-
-	_, err = fmt.Fprintln(w, sb.String())
-
-	return err
 }
