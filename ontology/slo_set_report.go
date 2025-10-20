@@ -68,8 +68,8 @@ func AnalyzeLabels(directory string, slos []v1.SLO) *MetricReport {
 	return report
 }
 
-// PrintReport prints a Markdown-formatted table of a single report
-func PrintReport(w io.Writer, report *MetricReport) {
+// WriteSLOSetReport prints a Markdown-formatted table of a single report
+func WriteSLOSetReport(w io.Writer, report *MetricReport) {
 	fmt.Fprintln(w)
 	fmt.Fprintf(w, "## %s\n\n", report.Directory)
 	fmt.Fprintf(w, "**Total SLOs:** %d\n\n", report.TotalSLOs)
@@ -160,6 +160,6 @@ func PrintReports(w io.Writer, reports map[string]*MetricReport) {
 	sort.Strings(dirs)
 
 	for _, dir := range dirs {
-		PrintReport(w, reports[dir])
+		WriteSLOSetReport(w, reports[dir])
 	}
 }
