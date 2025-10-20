@@ -21,6 +21,7 @@ func WriteSLOSetsReport(w io.Writer, slos map[string][]v1.SLO) error {
 	fmt.Fprintln(w)
 
 	hsetsLabelSetValue := histogram.NewHistogramSets("")
+	hsetsLabelSetValue.Order = Labels()
 
 	// Get sorted label names
 	labelOrder := Labels()
