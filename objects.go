@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/OpenSLO/go-sdk/pkg/openslo"
+	v1 "github.com/OpenSLO/go-sdk/pkg/openslo/v1"
 	"github.com/OpenSLO/go-sdk/pkg/openslosdk"
 )
 
@@ -15,11 +16,11 @@ type Objects []openslo.Object
 func Read(r io.Reader) (Objects, error) {
 	var out []openslo.Object
 	b, err := io.ReadAll(r)
-	if r != nil {
+	if err != nil {
 		return out, err
 	}
 	var osfmt openslosdk.ObjectFormat
-	if len(b) > 0 && b[0] == '{' {
+	if len(b) > 0 && b[0] == '[' {
 		osfmt = openslosdk.FormatJSON
 	} else {
 		osfmt = openslosdk.FormatYAML
@@ -64,4 +65,10 @@ func (objs Objects) WriteFileJSON(filename string) error {
 
 func (objs Objects) WriteFileYAML(filename string) error {
 	return objs.WriteFile(filename, openslosdk.FormatYAML)
+}
+
+func (objs *Objects) AddSLOs(slos ...v1.SLO) {
+	for _, slo := range slos {
+		*objs = append(*objs, slo)
+	}
 }
