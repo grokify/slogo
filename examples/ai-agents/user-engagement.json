@@ -1,0 +1,289 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "daily-active-users",
+      "displayName": "Daily Active Users",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track daily active users to monitor platform adoption and engagement",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "dau-count",
+          "displayName": "Daily active user count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(agent_user_activity_total[24h]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy DAU growth",
+          "op": "gte",
+          "value": 10000,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "user-retention",
+      "displayName": "7-Day User Retention",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of users who return within 7 days of first use",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "retention-rate",
+          "displayName": "7-day retention rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM returning_users WHERE days_since_first_use \u003c= 7"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM new_users WHERE created_at \u003e= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "4w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Good user retention",
+          "target": 0.6,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "session-duration",
+      "displayName": "User Session Duration",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track average session duration to measure user engagement depth",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "avg-session-duration",
+          "displayName": "Average session duration in minutes"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "avg(rate(agent_session_duration_seconds_sum[1h]) / rate(agent_session_duration_seconds_count[1h])) / 60"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Engaged sessions",
+          "op": "gte",
+          "value": 5,
+          "target": 0.8
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "conversation-turns",
+      "displayName": "Agent Conversation Depth",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track average conversation turns to measure engagement and agent helpfulness",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "avg-conversation-turns",
+          "displayName": "Average turns per conversation"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "avg(rate(agent_conversation_turns_sum[1h]) / rate(agent_conversation_turns_count[1h]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Meaningful conversations",
+          "op": "gte",
+          "value": 3,
+          "target": 0.75
+        }
+      ]
+    }
+  }
+]

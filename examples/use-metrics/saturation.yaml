@@ -1,0 +1,187 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: CPU Saturation (Load Average)
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - saturation
+      resource-type:
+      - cpu
+      scope:
+      - internal
+      severity:
+      - high
+      tier:
+      - p0
+    name: cpu-saturation
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor CPU saturation via load average to detect queuing and resource
+      contention
+    indicator:
+      metadata:
+        displayName: CPU load average per core
+        name: cpu-load
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: node_load5 / count(node_cpu_seconds_total{mode="idle"})
+            type: Prometheus
+    objectives:
+    - displayName: Acceptable CPU load
+      op: lt
+      target: 0.95
+      value: 1
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Memory Saturation (Swap Usage)
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - saturation
+      resource-type:
+      - memory
+      scope:
+      - internal
+      severity:
+      - critical
+      tier:
+      - p0
+    name: memory-saturation
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor memory saturation via swap usage to detect memory pressure
+    indicator:
+      metadata:
+        displayName: Swap usage percentage
+        name: swap-usage
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes))
+                * 100
+            type: Prometheus
+    objectives:
+    - displayName: Minimal swap usage
+      op: lt
+      target: 0.99
+      value: 10
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Disk I/O Saturation
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - saturation
+      resource-type:
+      - disk
+      scope:
+      - internal
+      severity:
+      - high
+      tier:
+      - p1
+    name: disk-saturation
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor disk I/O saturation to detect disk bottlenecks and queuing
+    indicator:
+      metadata:
+        displayName: Disk I/O utilization percentage
+        name: disk-io-utilization
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: rate(node_disk_io_time_seconds_total[5m]) * 100
+            type: Prometheus
+    objectives:
+    - displayName: Healthy disk I/O
+      op: lt
+      target: 0.95
+      value: 80
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Network Saturation
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - saturation
+      resource-type:
+      - network
+      scope:
+      - internal
+      severity:
+      - medium
+      tier:
+      - p1
+    name: network-saturation
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor network bandwidth saturation to detect network congestion
+    indicator:
+      metadata:
+        displayName: Network bandwidth usage percentage
+        name: network-bandwidth-usage
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: (rate(node_network_transmit_bytes_total[5m]) + rate(node_network_receive_bytes_total[5m]))
+                / 125000000 * 100
+            type: Prometheus
+    objectives:
+    - displayName: Healthy network bandwidth
+      op: lt
+      target: 0.95
+      value: 70
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true

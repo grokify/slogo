@@ -1,0 +1,194 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Disk I/O Errors
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - errors
+      resource-type:
+      - disk
+      scope:
+      - internal
+      severity:
+      - critical
+      tier:
+      - p0
+    name: disk-errors
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor disk I/O errors to detect failing or degraded storage devices
+    indicator:
+      metadata:
+        displayName: Rate of disk I/O errors
+        name: disk-error-rate
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: rate(node_disk_io_errors_total[5m])
+            type: Prometheus
+    objectives:
+    - displayName: Minimal disk errors
+      op: lt
+      target: 0.99
+      value: 0.01
+    service: backend-service
+    timeWindow:
+    - duration: 2w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Network Errors
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - errors
+      resource-type:
+      - network
+      scope:
+      - internal
+      severity:
+      - critical
+      tier:
+      - p0
+    name: network-errors
+  spec:
+    budgetingMethod: Timeslices
+    description: Monitor network errors including packet drops and transmission errors
+    indicator:
+      metadata:
+        displayName: Network error rate
+        name: network-error-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: rate(node_network_transmit_packets_total[5m]) + rate(node_network_receive_packets_total[5m])
+                  - (rate(node_network_transmit_errs_total[5m]) + rate(node_network_receive_errs_total[5m])
+                  + rate(node_network_transmit_drop_total[5m]) + rate(node_network_receive_drop_total[5m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: rate(node_network_transmit_packets_total[5m]) + rate(node_network_receive_packets_total[5m])
+              type: Prometheus
+    objectives:
+    - displayName: Low network error rate
+      target: 0.9999
+      timeSliceTarget: 0.95
+      timeSliceWindow: 5m
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Memory ECC Errors
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - errors
+      resource-type:
+      - memory
+      scope:
+      - internal
+      severity:
+      - critical
+      tier:
+      - p0
+    name: memory-errors
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor memory ECC errors to detect failing or degraded RAM modules
+    indicator:
+      metadata:
+        displayName: Rate of correctable and uncorrectable memory errors
+        name: memory-error-rate
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: rate(node_edac_correctable_errors_total[5m]) + rate(node_edac_uncorrectable_errors_total[5m])
+            type: Prometheus
+    objectives:
+    - displayName: Minimal memory errors
+      op: lt
+      target: 0.999
+      value: 0.001
+    service: backend-service
+    timeWindow:
+    - duration: 2w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: CPU Throttling Events
+    labels:
+      audience:
+      - sre
+      category:
+      - resource
+      framework:
+      - use
+      layer:
+      - infrastructure
+      metric-type:
+      - errors
+      resource-type:
+      - cpu
+      scope:
+      - internal
+      severity:
+      - high
+      tier:
+      - p1
+    name: cpu-throttling
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor CPU throttling events in containerized environments to detect
+      resource constraints
+    indicator:
+      metadata:
+        displayName: Rate of CPU throttling periods
+        name: cpu-throttle-rate
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: rate(container_cpu_cfs_throttled_periods_total[5m])
+            type: Prometheus
+    objectives:
+    - displayName: Minimal CPU throttling
+      op: lt
+      target: 0.95
+      value: 1
+    service: backend-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true

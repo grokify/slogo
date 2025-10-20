@@ -1,0 +1,251 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "agent-response-quality",
+      "displayName": "AI Agent Response Quality",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "satisfaction"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Ensure AI agents provide high-quality responses based on user satisfaction ratings",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "response-satisfaction-rate",
+          "displayName": "Percentage of responses rated positively by users"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_response_ratings_total{rating=~\"good|excellent\"}[10m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_response_ratings_total[10m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High user satisfaction",
+          "target": 0.85,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "10m"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "per-user-response-quality",
+      "displayName": "Per-User Response Quality",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "satisfaction"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor response quality per user to identify users with poor experience",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "user-satisfaction-rate",
+          "displayName": "Percentage of users with good response quality"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_response_ratings_total{rating=~\"good|excellent\"}[1d])) / sum by(user_id) (rate(agent_response_ratings_total[1d])) \u003e= 0.80)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_response_ratings_total[1d])))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Consistent quality across users",
+          "target": 0.9,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "agent-accuracy",
+      "displayName": "AI Agent Response Accuracy",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "satisfaction"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track the accuracy of agent responses by measuring hallucination rate and factual correctness",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "response-accuracy-rate",
+          "displayName": "Percentage of accurate responses"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_responses_total[10m])) - sum(rate(agent_hallucinations_total[10m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_responses_total[10m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High accuracy",
+          "target": 0.95,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "10m"
+        }
+      ]
+    }
+  }
+]

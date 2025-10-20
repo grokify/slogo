@@ -1,0 +1,45 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: API Request Rate
+    labels:
+      audience:
+      - sre
+      category:
+      - throughput
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - rate
+      scope:
+      - customer-facing
+      severity:
+      - medium
+      tier:
+      - p1
+    name: api-request-rate
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor API request rate to ensure the service handles expected traffic
+      volume
+    indicator:
+      metadata:
+        displayName: Requests per second
+        name: request-rate
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: rate(http_requests_total[5m])
+            type: Prometheus
+    objectives:
+    - displayName: Healthy request rate
+      op: gte
+      target: 0.99
+      value: 100
+    service: api-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true

@@ -1,0 +1,270 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Contact Management Feature Usage
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - adoption
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: contact-management-usage
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of active users who regularly use contact management
+      features
+    indicator:
+      metadata:
+        displayName: Weekly contact management adoption rate
+        name: contact-feature-adoption
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(feature_usage_total{feature="contacts"}[7d]))
+                  > 0)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(count_over_time(user_activity_total[7d]) > 0)
+              type: Prometheus
+    objectives:
+    - displayName: Strong contact feature adoption
+      target: 0.8
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Deal Pipeline Feature Usage
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - adoption
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: deal-pipeline-usage
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of active users managing deals in the pipeline
+    indicator:
+      metadata:
+        displayName: Weekly deal pipeline adoption rate
+        name: deal-feature-adoption
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(feature_usage_total{feature="deals"}[7d]))
+                  > 0)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(count_over_time(user_activity_total[7d]) > 0)
+              type: Prometheus
+    objectives:
+    - displayName: Good deal pipeline adoption
+      target: 0.6
+      timeSliceTarget: 0.8
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Email Integration Usage
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - adoption
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: email-integration-usage
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users with active email integration
+    indicator:
+      metadata:
+        displayName: Email integration adoption rate
+        name: email-integration-adoption
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(email_integration_status{status="active"})
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(count_over_time(user_activity_total[7d]) > 0)
+              type: Prometheus
+    objectives:
+    - displayName: Strong email integration
+      target: 0.7
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Reporting & Analytics Usage
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - adoption
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: reporting-usage
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of active users who view reports or dashboards
+    indicator:
+      metadata:
+        displayName: Weekly reporting feature adoption rate
+        name: reporting-adoption
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(feature_usage_total{feature=~"reports|dashboards"}[7d]))
+                  > 0)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(count_over_time(user_activity_total[7d]) > 0)
+              type: Prometheus
+    objectives:
+    - displayName: Good reporting adoption
+      target: 0.45
+      timeSliceTarget: 0.75
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Mobile App Usage
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - adoption
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: mobile-app-usage
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of active users who use the mobile app
+    indicator:
+      metadata:
+        displayName: Monthly mobile app adoption rate
+        name: mobile-adoption
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(user_activity_total{platform="mobile"}[30d]))
+                  > 0)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(count_over_time(user_activity_total[30d]) > 0)
+              type: Prometheus
+    objectives:
+    - displayName: Growing mobile adoption
+      target: 0.35
+      timeSliceTarget: 0.75
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true

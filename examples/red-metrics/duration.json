@@ -1,0 +1,140 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "api-latency",
+      "displayName": "API Request Duration",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "latency"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "duration"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor request latency to ensure fast response times for users",
+      "service": "api-service",
+      "indicator": {
+        "metadata": {
+          "name": "request-duration",
+          "displayName": "P95 latency of API requests"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Fast response time",
+          "op": "lt",
+          "value": 200,
+          "target": 0.95
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "api-latency-p99",
+      "displayName": "API P99 Duration",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "latency"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "duration"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor P99 latency to catch tail latency issues",
+      "service": "api-service",
+      "indicator": {
+        "metadata": {
+          "name": "request-duration-p99",
+          "displayName": "P99 latency of API requests"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "P99 latency target",
+          "op": "lt",
+          "value": 500,
+          "target": 0.99
+        }
+      ]
+    }
+  }
+]

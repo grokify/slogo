@@ -1,0 +1,229 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "agent-response-time",
+      "displayName": "AI Agent Response Time",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "latency"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "duration"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Ensure AI agents respond quickly to user queries for good user experience",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "agent-p95-latency",
+          "displayName": "P95 response time for agent queries"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "histogram_quantile(0.95, rate(agent_response_duration_seconds_bucket[5m]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Fast response time",
+          "op": "lt",
+          "value": 3,
+          "target": 0.95
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "per-user-response-time",
+      "displayName": "Per-User Response Time",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "latency"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "duration"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor response time per user to ensure consistent performance",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "user-response-time",
+          "displayName": "Percentage of users with acceptable response times"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(histogram_quantile(0.95, sum by(user_id, le) (rate(agent_response_duration_seconds_bucket[1h]))) \u003c 3)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_response_duration_seconds_count[1h])))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Consistent performance",
+          "target": 0.95,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "1h"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "agent-first-token-latency",
+      "displayName": "AI Agent First Token Latency",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "latency"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "duration"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track time to first token in streaming responses for perceived responsiveness",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "first-token-latency",
+          "displayName": "P95 time to first token"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "histogram_quantile(0.95, rate(agent_first_token_duration_seconds_bucket[5m]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Responsive streaming",
+          "op": "lt",
+          "value": 0.5,
+          "target": 0.95
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "api-error-rate",
+      "displayName": "API Error Rate",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "quality"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track error rate to ensure service reliability - successful responses (2xx, 3xx) vs errors (4xx, 5xx)",
+      "service": "api-service",
+      "indicator": {
+        "metadata": {
+          "name": "error-rate",
+          "displayName": "Percentage of successful requests"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(http_requests_total{status=~\"2..|3..\"}[5m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(http_requests_total[5m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "4w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High reliability",
+          "target": 0.999,
+          "timeSliceTarget": 0.95,
+          "timeSliceWindow": "5m"
+        },
+        {
+          "displayName": "Acceptable reliability",
+          "target": 0.99,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "5m"
+        }
+      ]
+    }
+  }
+]

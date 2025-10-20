@@ -1,0 +1,168 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "agent-availability",
+      "displayName": "AI Agent Service Availability",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Ensure AI agents are available when users need them - successful agent sessions vs total attempts",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "agent-session-success-rate",
+          "displayName": "Successful agent session start rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_session_starts_total{status=\"success\"}[5m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_session_starts_total[5m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "4w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High availability",
+          "target": 0.999,
+          "timeSliceTarget": 0.95,
+          "timeSliceWindow": "5m"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "per-user-agent-availability",
+      "displayName": "Per-User Agent Availability",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track agent availability per user to ensure consistent service across all customers",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "user-agent-success-rate",
+          "displayName": "Per-user agent session success rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_session_starts_total{status=\"success\"}[1h])) / sum by(user_id) (rate(agent_session_starts_total[1h])) \u003e= 0.99)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_session_starts_total[1h])))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Consistent user experience",
+          "target": 0.95,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "1h"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,290 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "cpu-saturation",
+      "displayName": "CPU Saturation (Load Average)",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "saturation"
+        ],
+        "resource-type": [
+          "cpu"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor CPU saturation via load average to detect queuing and resource contention",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "cpu-load",
+          "displayName": "CPU load average per core"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "node_load5 / count(node_cpu_seconds_total{mode=\"idle\"})"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Acceptable CPU load",
+          "op": "lt",
+          "value": 1,
+          "target": 0.95
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "memory-saturation",
+      "displayName": "Memory Saturation (Swap Usage)",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "saturation"
+        ],
+        "resource-type": [
+          "memory"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor memory saturation via swap usage to detect memory pressure",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "swap-usage",
+          "displayName": "Swap usage percentage"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "(1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Minimal swap usage",
+          "op": "lt",
+          "value": 10,
+          "target": 0.99
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "disk-saturation",
+      "displayName": "Disk I/O Saturation",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "saturation"
+        ],
+        "resource-type": [
+          "disk"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor disk I/O saturation to detect disk bottlenecks and queuing",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "disk-io-utilization",
+          "displayName": "Disk I/O utilization percentage"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "rate(node_disk_io_time_seconds_total[5m]) * 100"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy disk I/O",
+          "op": "lt",
+          "value": 80,
+          "target": 0.95
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "network-saturation",
+      "displayName": "Network Saturation",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "saturation"
+        ],
+        "resource-type": [
+          "network"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor network bandwidth saturation to detect network congestion",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "network-bandwidth-usage",
+          "displayName": "Network bandwidth usage percentage"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "(rate(node_network_transmit_bytes_total[5m]) + rate(node_network_receive_bytes_total[5m])) / 125000000 * 100"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy network bandwidth",
+          "op": "lt",
+          "value": 70,
+          "target": 0.95
+        }
+      ]
+    }
+  }
+]

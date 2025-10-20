@@ -1,0 +1,171 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: New User Activation Rate
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - activation
+      layer:
+      - business
+      metric-type:
+      - activation
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p0
+    name: user-activation-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of new users who complete core activation steps
+      within first 7 days
+    indicator:
+      metadata:
+        displayName: New user activation completion rate
+        name: activation-completion
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE activated =
+                  true AND activation_date <= DATE_ADD(signup_date, INTERVAL 7 DAY)
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date
+                  >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Strong activation rate
+      target: 0.6
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 4w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Time to First Value
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - activation
+      layer:
+      - business
+      metric-type:
+      - activation
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: time-to-first-value
+  spec:
+    budgetingMethod: Timeslices
+    description: Track how quickly new users create their first contact or deal
+    indicator:
+      metadata:
+        displayName: Percentage of users with first value within 24 hours
+        name: fast-first-value
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_milestones WHERE milestone
+                  = 'first_contact_created' AND TIMESTAMP_DIFF(milestone_time, signup_time,
+                  HOUR) <= 24
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date
+                  >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Fast time to value
+      target: 0.5
+      timeSliceTarget: 0.8
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Onboarding Completion Rate
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - activation
+      layer:
+      - business
+      metric-type:
+      - activation
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: onboarding-completion
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users who complete the full onboarding checklist
+    indicator:
+      metadata:
+        displayName: Onboarding completion rate
+        name: onboarding-complete
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(onboarding_progress{status="completed"})
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(onboarding_progress)
+              type: Prometheus
+    objectives:
+    - displayName: High onboarding completion
+      target: 0.7
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true

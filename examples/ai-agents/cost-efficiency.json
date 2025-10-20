@@ -1,0 +1,312 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "token-usage-per-task",
+      "displayName": "Token Usage Efficiency",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "cost"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor average token usage per completed task to ensure cost efficiency",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "avg-tokens-per-task",
+          "displayName": "Average tokens consumed per task"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "sum(rate(agent_tokens_consumed_total[1h])) / sum(rate(agent_tasks_total{status=\"completed\"}[1h]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Efficient token usage",
+          "op": "lt",
+          "value": 5000,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "per-user-cost",
+      "displayName": "Per-User Cost Efficiency",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "cost"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track average cost per user to ensure sustainable economics",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "user-cost-distribution",
+          "displayName": "Percentage of users within cost budget"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_cost_usd_total[1d])) \u003c 5)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_cost_usd_total[1d])))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Cost within budget",
+          "target": 0.95,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "cost-per-successful-task",
+      "displayName": "Cost per Successful Task",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "cost"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor cost per successfully completed task to optimize ROI",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "successful-task-cost",
+          "displayName": "Average cost per successful task in USD"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "sum(rate(agent_cost_usd_total[1h])) / sum(rate(agent_tasks_total{status=\"completed\"}[1h]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Sustainable unit economics",
+          "op": "lt",
+          "value": 0.5,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "cache-hit-rate",
+      "displayName": "Agent Response Cache Hit Rate",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "cost"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track cache hit rate to reduce costs and improve response times",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "cache-efficiency",
+          "displayName": "Percentage of cacheable requests served from cache"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_cache_hits_total[5m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_cache_requests_total[5m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High cache efficiency",
+          "target": 0.7,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "5m"
+        }
+      ]
+    }
+  }
+]

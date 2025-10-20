@@ -1,0 +1,280 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: 7-Day User Retention
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - retention
+      layer:
+      - business
+      metric-type:
+      - retention
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: day7-retention
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users who return on day 7 after signup
+    indicator:
+      metadata:
+        displayName: Day 7 retention rate
+        name: week-1-retention
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_retention WHERE days_since_signup
+                  = 7 AND was_active = true
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date
+                  = DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Strong early retention
+      target: 0.5
+      timeSliceTarget: 0.8
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 4w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: 30-Day User Retention
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - retention
+      layer:
+      - business
+      metric-type:
+      - retention
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: day30-retention
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users who return on day 30 after signup
+    indicator:
+      metadata:
+        displayName: Day 30 retention rate
+        name: month-1-retention
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_retention WHERE days_since_signup
+                  = 30 AND was_active = true
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date
+                  = DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Good monthly retention
+      target: 0.4
+      timeSliceTarget: 0.8
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 3M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Monthly Customer Churn Rate
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - retention
+      layer:
+      - business
+      metric-type:
+      - retention
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: monthly-churn-rate
+  spec:
+    budgetingMethod: Occurrences
+    description: Track monthly churn rate to ensure retention goals are met
+    indicator:
+      metadata:
+        displayName: Monthly retention rate (1 - churn)
+        name: customer-retention-rate
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: SELECT 1 - (churned_customers / total_customers_start_of_month)
+                FROM monthly_churn_metrics WHERE month = CURRENT_DATE()
+            type: BigQuery
+    objectives:
+    - displayName: Low churn rate
+      op: gte
+      target: 0.9
+      value: 0.97
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 3M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: User Resurrection Rate
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - retention
+      layer:
+      - business
+      metric-type:
+      - retention
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: user-resurrection-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of previously inactive users (30+ days) who return
+    indicator:
+      metadata:
+        displayName: Monthly user resurrection rate
+        name: resurrection-percentage
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_activity WHERE last_active_date
+                  <= DATE_SUB(CURRENT_DATE(), INTERVAL 60 DAY) AND current_active_date
+                  >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM users WHERE last_active_date
+                  <= DATE_SUB(CURRENT_DATE(), INTERVAL 60 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Healthy resurrection rate
+      target: 0.1
+      timeSliceTarget: 0.75
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: 90-Day Cohort Retention
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - retention
+      layer:
+      - business
+      metric-type:
+      - retention
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: cohort-retention-90d
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users from each cohort still active after 90
+      days
+    indicator:
+      metadata:
+        displayName: 90-day cohort retention rate
+        name: cohort-90d-retention
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_cohorts WHERE cohort_date
+                  = DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY) AND days_active_in_last_30d
+                  > 0
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM user_cohorts WHERE cohort_date
+                  = DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Strong long-term retention
+      target: 0.35
+      timeSliceTarget: 0.8
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 3M
+      isRolling: true

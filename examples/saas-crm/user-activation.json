@@ -1,0 +1,260 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "user-activation-rate",
+      "displayName": "New User Activation Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "activation"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "activation"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of new users who complete core activation steps within first 7 days",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "activation-completion",
+          "displayName": "New user activation completion rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM users WHERE activated = true AND activation_date \u003c= DATE_ADD(signup_date, INTERVAL 7 DAY)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date \u003e= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "4w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Strong activation rate",
+          "target": 0.6,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "time-to-first-value",
+      "displayName": "Time to First Value",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "activation"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "activation"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track how quickly new users create their first contact or deal",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "fast-first-value",
+          "displayName": "Percentage of users with first value within 24 hours"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM user_milestones WHERE milestone = 'first_contact_created' AND TIMESTAMP_DIFF(milestone_time, signup_time, HOUR) \u003c= 24"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM users WHERE signup_date \u003e= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Fast time to value",
+          "target": 0.5,
+          "timeSliceTarget": 0.8,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "onboarding-completion",
+      "displayName": "Onboarding Completion Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "activation"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "activation"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of users who complete the full onboarding checklist",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "onboarding-complete",
+          "displayName": "Onboarding completion rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(onboarding_progress{status=\"completed\"})"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(onboarding_progress)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High onboarding completion",
+          "target": 0.7,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  }
+]

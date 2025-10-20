@@ -1,0 +1,417 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "contact-management-usage",
+      "displayName": "Contact Management Feature Usage",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "adoption"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of active users who regularly use contact management features",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "contact-feature-adoption",
+          "displayName": "Weekly contact management adoption rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(feature_usage_total{feature=\"contacts\"}[7d])) \u003e 0)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(count_over_time(user_activity_total[7d]) \u003e 0)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Strong contact feature adoption",
+          "target": 0.8,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "deal-pipeline-usage",
+      "displayName": "Deal Pipeline Feature Usage",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "adoption"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of active users managing deals in the pipeline",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "deal-feature-adoption",
+          "displayName": "Weekly deal pipeline adoption rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(feature_usage_total{feature=\"deals\"}[7d])) \u003e 0)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(count_over_time(user_activity_total[7d]) \u003e 0)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Good deal pipeline adoption",
+          "target": 0.6,
+          "timeSliceTarget": 0.8,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "email-integration-usage",
+      "displayName": "Email Integration Usage",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "adoption"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of users with active email integration",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "email-integration-adoption",
+          "displayName": "Email integration adoption rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(email_integration_status{status=\"active\"})"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(count_over_time(user_activity_total[7d]) \u003e 0)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Strong email integration",
+          "target": 0.7,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "reporting-usage",
+      "displayName": "Reporting \u0026 Analytics Usage",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "adoption"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of active users who view reports or dashboards",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "reporting-adoption",
+          "displayName": "Weekly reporting feature adoption rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(feature_usage_total{feature=~\"reports|dashboards\"}[7d])) \u003e 0)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(count_over_time(user_activity_total[7d]) \u003e 0)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Good reporting adoption",
+          "target": 0.45,
+          "timeSliceTarget": 0.75,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "mobile-app-usage",
+      "displayName": "Mobile App Usage",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "adoption"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p2"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of active users who use the mobile app",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "mobile-adoption",
+          "displayName": "Monthly mobile app adoption rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(user_activity_total{platform=\"mobile\"}[30d])) \u003e 0)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(count_over_time(user_activity_total[30d]) \u003e 0)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Growing mobile adoption",
+          "target": 0.35,
+          "timeSliceTarget": 0.75,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  }
+]

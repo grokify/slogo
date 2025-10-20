@@ -1,0 +1,373 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "deals-created-rate",
+      "displayName": "Deal Creation Rate",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "revenue"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track the rate of new deals being created in the system",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "deal-creation-velocity",
+          "displayName": "Daily deal creation count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "sum(rate(deals_created_total[24h]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy deal creation",
+          "op": "gte",
+          "value": 1000,
+          "target": 0.85
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "deal-win-rate",
+      "displayName": "Deal Win Rate",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "revenue"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of closed deals that are won (vs lost)",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "win-rate-percentage",
+          "displayName": "Win rate for closed deals"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(deals_closed_total{status=\"won\"}[7d]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(deals_closed_total[7d]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy win rate",
+          "target": 0.3,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "sales-cycle-length",
+      "displayName": "Average Sales Cycle Length",
+      "labels": {
+        "audience": [
+          "executive"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "revenue"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track average time from deal creation to close (won or lost)",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "avg-sales-cycle-days",
+          "displayName": "Average sales cycle in days"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "avg(rate(deal_cycle_duration_days_sum[7d]) / rate(deal_cycle_duration_days_count[7d]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Efficient sales cycle",
+          "op": "lt",
+          "value": 45,
+          "target": 0.8
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "contact-creation-rate",
+      "displayName": "Contact Creation Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "conversion"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track the rate of new contacts being added to the CRM",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "contact-growth-velocity",
+          "displayName": "Daily contact creation count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "sum(rate(contacts_created_total[24h]))"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy contact growth",
+          "op": "gte",
+          "value": 5000,
+          "target": 0.85
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "emails-sent-per-user",
+      "displayName": "Emails Sent Per Active User",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track average number of emails sent per active user to measure engagement",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "email-activity-per-user",
+          "displayName": "Average emails sent per DAU"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "sum(rate(emails_sent_total[24h])) / count(count_over_time(user_activity_total[24h]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Active email engagement",
+          "op": "gte",
+          "value": 10,
+          "target": 0.8
+        }
+      ]
+    }
+  }
+]

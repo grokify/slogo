@@ -1,0 +1,162 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: AI Agent Response Quality
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - satisfaction
+      scope:
+      - customer-facing
+      severity:
+      - high
+      tier:
+      - p0
+    name: agent-response-quality
+  spec:
+    budgetingMethod: Timeslices
+    description: Ensure AI agents provide high-quality responses based on user satisfaction
+      ratings
+    indicator:
+      metadata:
+        displayName: Percentage of responses rated positively by users
+        name: response-satisfaction-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_response_ratings_total{rating=~"good|excellent"}[10m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_response_ratings_total[10m]))
+              type: Prometheus
+    objectives:
+    - displayName: High user satisfaction
+      target: 0.85
+      timeSliceTarget: 0.9
+      timeSliceWindow: 10m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 2w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Per-User Response Quality
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - satisfaction
+      scope:
+      - customer-facing
+      severity:
+      - high
+      tier:
+      - p0
+    name: per-user-response-quality
+  spec:
+    budgetingMethod: Timeslices
+    description: Monitor response quality per user to identify users with poor experience
+    indicator:
+      metadata:
+        displayName: Percentage of users with good response quality
+        name: user-satisfaction-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_response_ratings_total{rating=~"good|excellent"}[1d]))
+                  / sum by(user_id) (rate(agent_response_ratings_total[1d])) >= 0.80)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_response_ratings_total[1d])))
+              type: Prometheus
+    objectives:
+    - displayName: Consistent quality across users
+      target: 0.9
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: AI Agent Response Accuracy
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - satisfaction
+      scope:
+      - customer-facing
+      severity:
+      - critical
+      tier:
+      - p0
+    name: agent-accuracy
+  spec:
+    budgetingMethod: Timeslices
+    description: Track the accuracy of agent responses by measuring hallucination
+      rate and factual correctness
+    indicator:
+      metadata:
+        displayName: Percentage of accurate responses
+        name: response-accuracy-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_responses_total[10m])) - sum(rate(agent_hallucinations_total[10m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_responses_total[10m]))
+              type: Prometheus
+    objectives:
+    - displayName: High accuracy
+      target: 0.95
+      timeSliceTarget: 0.9
+      timeSliceWindow: 10m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true

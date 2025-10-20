@@ -1,0 +1,88 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: API Request Duration
+    labels:
+      audience:
+      - sre
+      category:
+      - latency
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - duration
+      scope:
+      - customer-facing
+      severity:
+      - high
+      tier:
+      - p0
+    name: api-latency
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor request latency to ensure fast response times for users
+    indicator:
+      metadata:
+        displayName: P95 latency of API requests
+        name: request-duration
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+            type: Prometheus
+    objectives:
+    - displayName: Fast response time
+      op: lt
+      target: 0.95
+      value: 200
+    service: api-service
+    timeWindow:
+    - duration: 2w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: API P99 Duration
+    labels:
+      audience:
+      - sre
+      category:
+      - latency
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - duration
+      scope:
+      - customer-facing
+      severity:
+      - high
+      tier:
+      - p1
+    name: api-latency-p99
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor P99 latency to catch tail latency issues
+    indicator:
+      metadata:
+        displayName: P99 latency of API requests
+        name: request-duration-p99
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))
+            type: Prometheus
+    objectives:
+    - displayName: P99 latency target
+      op: lt
+      target: 0.99
+      value: 500
+    service: api-service
+    timeWindow:
+    - duration: 1w
+      isRolling: true

@@ -1,0 +1,71 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "api-request-rate",
+      "displayName": "API Request Rate",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "throughput"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "rate"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "medium"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor API request rate to ensure the service handles expected traffic volume",
+      "service": "api-service",
+      "indicator": {
+        "metadata": {
+          "name": "request-rate",
+          "displayName": "Requests per second"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "rate(http_requests_total[5m])"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy request rate",
+          "op": "gte",
+          "value": 100,
+          "target": 0.99
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,334 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "task-completion-rate",
+      "displayName": "Agent Task Completion Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track the percentage of user tasks that agents successfully complete without errors or abandonment",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "task-success-rate",
+          "displayName": "Percentage of successfully completed tasks"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total{status=\"completed\"}[10m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total[10m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "High task completion",
+          "target": 0.9,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "10m"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "per-user-task-completion",
+      "displayName": "Per-User Task Completion Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor task completion per user to identify users struggling with the agent",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "user-task-success",
+          "displayName": "Percentage of users with high task completion"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_tasks_total{status=\"completed\"}[1d])) / sum by(user_id) (rate(agent_tasks_total[1d])) \u003e= 0.85)"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "count(sum by(user_id) (rate(agent_tasks_total[1d])))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Consistent user success",
+          "target": 0.9,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "task-abandonment-rate",
+      "displayName": "Agent Task Abandonment Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track task abandonment rate to identify user frustration and agent limitations",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "task-retention-rate",
+          "displayName": "Percentage of tasks not abandoned"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total[10m])) - sum(rate(agent_tasks_total{status=\"abandoned\"}[10m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total[10m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Low abandonment rate",
+          "target": 0.95,
+          "timeSliceTarget": 0.9,
+          "timeSliceWindow": "10m"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "multi-step-task-success",
+      "displayName": "Multi-Step Task Success Rate",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "quality"
+        ],
+        "domain": [
+          "ai-ml"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "efficiency"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track success rate for complex tasks requiring multiple agent actions",
+      "service": "ai-agent-platform",
+      "indicator": {
+        "metadata": {
+          "name": "complex-task-success",
+          "displayName": "Multi-step task completion rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total{type=\"multi_step\",status=\"completed\"}[10m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(agent_tasks_total{type=\"multi_step\"}[10m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Complex task reliability",
+          "target": 0.85,
+          "timeSliceTarget": 0.8,
+          "timeSliceWindow": "10m"
+        }
+      ]
+    }
+  }
+]

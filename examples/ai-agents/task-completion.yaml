@@ -1,0 +1,216 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Agent Task Completion Rate
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p0
+    name: task-completion-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track the percentage of user tasks that agents successfully complete
+      without errors or abandonment
+    indicator:
+      metadata:
+        displayName: Percentage of successfully completed tasks
+        name: task-success-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total{status="completed"}[10m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total[10m]))
+              type: Prometheus
+    objectives:
+    - displayName: High task completion
+      target: 0.9
+      timeSliceTarget: 0.85
+      timeSliceWindow: 10m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 2w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Per-User Task Completion Rate
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: per-user-task-completion
+  spec:
+    budgetingMethod: Timeslices
+    description: Monitor task completion per user to identify users struggling with
+      the agent
+    indicator:
+      metadata:
+        displayName: Percentage of users with high task completion
+        name: user-task-success
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_tasks_total{status="completed"}[1d]))
+                  / sum by(user_id) (rate(agent_tasks_total[1d])) >= 0.85)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_tasks_total[1d])))
+              type: Prometheus
+    objectives:
+    - displayName: Consistent user success
+      target: 0.9
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Agent Task Abandonment Rate
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: task-abandonment-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track task abandonment rate to identify user frustration and agent
+      limitations
+    indicator:
+      metadata:
+        displayName: Percentage of tasks not abandoned
+        name: task-retention-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total[10m])) - sum(rate(agent_tasks_total{status="abandoned"}[10m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total[10m]))
+              type: Prometheus
+    objectives:
+    - displayName: Low abandonment rate
+      target: 0.95
+      timeSliceTarget: 0.9
+      timeSliceWindow: 10m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Multi-Step Task Success Rate
+    labels:
+      audience:
+      - product
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: multi-step-task-success
+  spec:
+    budgetingMethod: Timeslices
+    description: Track success rate for complex tasks requiring multiple agent actions
+    indicator:
+      metadata:
+        displayName: Multi-step task completion rate
+        name: complex-task-success
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total{type="multi_step",status="completed"}[10m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_tasks_total{type="multi_step"}[10m]))
+              type: Prometheus
+    objectives:
+    - displayName: Complex task reliability
+      target: 0.85
+      timeSliceTarget: 0.8
+      timeSliceWindow: 10m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 2w
+      isRolling: true

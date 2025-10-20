@@ -1,0 +1,301 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "disk-errors",
+      "displayName": "Disk I/O Errors",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "resource-type": [
+          "disk"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor disk I/O errors to detect failing or degraded storage devices",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "disk-error-rate",
+          "displayName": "Rate of disk I/O errors"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "rate(node_disk_io_errors_total[5m])"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Minimal disk errors",
+          "op": "lt",
+          "value": 0.01,
+          "target": 0.99
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "network-errors",
+      "displayName": "Network Errors",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "resource-type": [
+          "network"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor network errors including packet drops and transmission errors",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "network-error-rate",
+          "displayName": "Network error rate"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "rate(node_network_transmit_packets_total[5m]) + rate(node_network_receive_packets_total[5m]) - (rate(node_network_transmit_errs_total[5m]) + rate(node_network_receive_errs_total[5m]) + rate(node_network_transmit_drop_total[5m]) + rate(node_network_receive_drop_total[5m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "rate(node_network_transmit_packets_total[5m]) + rate(node_network_receive_packets_total[5m])"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Low network error rate",
+          "target": 0.9999,
+          "timeSliceTarget": 0.95,
+          "timeSliceWindow": "5m"
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "memory-errors",
+      "displayName": "Memory ECC Errors",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "resource-type": [
+          "memory"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor memory ECC errors to detect failing or degraded RAM modules",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "memory-error-rate",
+          "displayName": "Rate of correctable and uncorrectable memory errors"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "rate(node_edac_correctable_errors_total[5m]) + rate(node_edac_uncorrectable_errors_total[5m])"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "2w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Minimal memory errors",
+          "op": "lt",
+          "value": 0.001,
+          "target": 0.999
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "cpu-throttling",
+      "displayName": "CPU Throttling Events",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "resource"
+        ],
+        "framework": [
+          "use"
+        ],
+        "layer": [
+          "infrastructure"
+        ],
+        "metric-type": [
+          "errors"
+        ],
+        "resource-type": [
+          "cpu"
+        ],
+        "scope": [
+          "internal"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Monitor CPU throttling events in containerized environments to detect resource constraints",
+      "service": "backend-service",
+      "indicator": {
+        "metadata": {
+          "name": "cpu-throttle-rate",
+          "displayName": "Rate of CPU throttling periods"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "rate(container_cpu_cfs_throttled_periods_total[5m])"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Minimal CPU throttling",
+          "op": "lt",
+          "value": 1,
+          "target": 0.95
+        }
+      ]
+    }
+  }
+]

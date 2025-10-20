@@ -1,0 +1,454 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "daily-active-users",
+      "displayName": "Daily Active Users (DAU)",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track daily active users to monitor platform engagement",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "dau-count",
+          "displayName": "Daily active user count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(user_activity_total[24h]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy daily engagement",
+          "op": "gte",
+          "value": 50000,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "monthly-active-users",
+      "displayName": "Monthly Active Users (MAU)",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track monthly active users to monitor overall platform adoption",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "mau-count",
+          "displayName": "Monthly active user count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(user_activity_total[30d]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "3M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Strong monthly engagement",
+          "op": "gte",
+          "value": 200000,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "dau-mau-ratio",
+      "displayName": "DAU/MAU Ratio (Stickiness)",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "stickiness"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track DAU/MAU ratio to measure product stickiness and engagement frequency",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "stickiness-ratio",
+          "displayName": "Ratio of daily to monthly active users"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(user_activity_total[24h]) \u003e 0) / count(count_over_time(user_activity_total[30d]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Good stickiness",
+          "op": "gte",
+          "value": 0.4,
+          "target": 0.85
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "weekly-active-users",
+      "displayName": "Weekly Active Users (WAU)",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track weekly active users for mid-range engagement metrics",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "wau-count",
+          "displayName": "Weekly active user count"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(user_activity_total[7d]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "2M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy weekly engagement",
+          "op": "gte",
+          "value": 120000,
+          "target": 0.9
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "dau-wau-ratio",
+      "displayName": "DAU/WAU Ratio",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "stickiness"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track DAU/WAU ratio to measure weekly engagement intensity",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "weekly-stickiness",
+          "displayName": "Ratio of daily to weekly active users"
+        },
+        "spec": {
+          "thresholdMetric": {
+            "metricSource": {
+              "type": "Prometheus",
+              "spec": {
+                "query": "count(count_over_time(user_activity_total[24h]) \u003e 0) / count(count_over_time(user_activity_total[7d]) \u003e 0)"
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Occurrences",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Strong weekly stickiness",
+          "op": "gte",
+          "value": 0.6,
+          "target": 0.85
+        }
+      ]
+    }
+  },
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "power-user-ratio",
+      "displayName": "Power User Ratio",
+      "labels": {
+        "audience": [
+          "product"
+        ],
+        "category": [
+          "engagement"
+        ],
+        "domain": [
+          "crm"
+        ],
+        "framework": [
+          "custom"
+        ],
+        "journey-stage": [
+          "engagement"
+        ],
+        "layer": [
+          "business"
+        ],
+        "metric-type": [
+          "stickiness"
+        ],
+        "scope": [
+          "business-outcome"
+        ],
+        "severity": [
+          "high"
+        ],
+        "tier": [
+          "p1"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track percentage of users who are highly engaged (active 20+ days per month)",
+      "service": "saas-crm-platform",
+      "indicator": {
+        "metadata": {
+          "name": "power-user-percentage",
+          "displayName": "Percentage of power users among MAU"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM user_activity WHERE days_active_last_30d \u003e= 20"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "BigQuery",
+                "spec": {
+                  "query": "SELECT COUNT(DISTINCT user_id) FROM user_activity WHERE days_active_last_30d \u003e 0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "1M",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Healthy power user base",
+          "target": 0.25,
+          "timeSliceTarget": 0.85,
+          "timeSliceWindow": "1d"
+        }
+      ]
+    }
+  }
+]

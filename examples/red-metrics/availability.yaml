@@ -1,0 +1,56 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: API Service Availability
+    labels:
+      audience:
+      - sre
+      category:
+      - availability
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - availability
+      scope:
+      - customer-facing
+      severity:
+      - critical
+      tier:
+      - p0
+    name: api-availability
+  spec:
+    budgetingMethod: Timeslices
+    description: Track overall service availability derived from request rate and
+      error rate - ensures service is both reachable and responding successfully
+    indicator:
+      metadata:
+        displayName: Service availability percentage
+        name: service-availability
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(http_requests_total{status=~"2..|3.."}[5m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(http_requests_total[5m]))
+              type: Prometheus
+    objectives:
+    - displayName: Four nines availability
+      target: 0.9999
+      timeSliceTarget: 0.99
+      timeSliceWindow: 5m
+    - displayName: Three nines availability
+      target: 0.999
+      timeSliceTarget: 0.95
+      timeSliceWindow: 5m
+    service: api-service
+    timeWindow:
+    - duration: 4w
+      isRolling: true

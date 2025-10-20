@@ -1,0 +1,187 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Daily Active Users
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: daily-active-users
+  spec:
+    budgetingMethod: Occurrences
+    description: Track daily active users to monitor platform adoption and engagement
+    indicator:
+      metadata:
+        displayName: Daily active user count
+        name: dau-count
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: count(count_over_time(agent_user_activity_total[24h]) > 0)
+            type: Prometheus
+    objectives:
+    - displayName: Healthy DAU growth
+      op: gte
+      target: 0.9
+      value: 10000
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: 7-Day User Retention
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: user-retention
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of users who return within 7 days of first use
+    indicator:
+      metadata:
+        displayName: 7-day retention rate
+        name: retention-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM returning_users WHERE days_since_first_use
+                  <= 7
+              type: BigQuery
+          total:
+            metricSource:
+              spec:
+                query: SELECT COUNT(DISTINCT user_id) FROM new_users WHERE created_at
+                  >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+              type: BigQuery
+    objectives:
+    - displayName: Good user retention
+      target: 0.6
+      timeSliceTarget: 0.9
+      timeSliceWindow: 1d
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 4w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: User Session Duration
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: session-duration
+  spec:
+    budgetingMethod: Occurrences
+    description: Track average session duration to measure user engagement depth
+    indicator:
+      metadata:
+        displayName: Average session duration in minutes
+        name: avg-session-duration
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: avg(rate(agent_session_duration_seconds_sum[1h]) / rate(agent_session_duration_seconds_count[1h]))
+                / 60
+            type: Prometheus
+    objectives:
+    - displayName: Engaged sessions
+      op: gte
+      target: 0.8
+      value: 5
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Agent Conversation Depth
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: conversation-turns
+  spec:
+    budgetingMethod: Occurrences
+    description: Track average conversation turns to measure engagement and agent
+      helpfulness
+    indicator:
+      metadata:
+        displayName: Average turns per conversation
+        name: avg-conversation-turns
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: avg(rate(agent_conversation_turns_sum[1h]) / rate(agent_conversation_turns_count[1h]))
+            type: Prometheus
+    objectives:
+    - displayName: Meaningful conversations
+      op: gte
+      target: 0.75
+      value: 3
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true

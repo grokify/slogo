@@ -1,0 +1,238 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Deal Creation Rate
+    labels:
+      audience:
+      - executive
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - revenue
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: deals-created-rate
+  spec:
+    budgetingMethod: Occurrences
+    description: Track the rate of new deals being created in the system
+    indicator:
+      metadata:
+        displayName: Daily deal creation count
+        name: deal-creation-velocity
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: sum(rate(deals_created_total[24h]))
+            type: Prometheus
+    objectives:
+    - displayName: Healthy deal creation
+      op: gte
+      target: 0.85
+      value: 1000
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Deal Win Rate
+    labels:
+      audience:
+      - executive
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - revenue
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: deal-win-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track percentage of closed deals that are won (vs lost)
+    indicator:
+      metadata:
+        displayName: Win rate for closed deals
+        name: win-rate-percentage
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(deals_closed_total{status="won"}[7d]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(deals_closed_total[7d]))
+              type: Prometheus
+    objectives:
+    - displayName: Healthy win rate
+      target: 0.3
+      timeSliceTarget: 0.85
+      timeSliceWindow: 1d
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Average Sales Cycle Length
+    labels:
+      audience:
+      - executive
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - revenue
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: sales-cycle-length
+  spec:
+    budgetingMethod: Occurrences
+    description: Track average time from deal creation to close (won or lost)
+    indicator:
+      metadata:
+        displayName: Average sales cycle in days
+        name: avg-sales-cycle-days
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: avg(rate(deal_cycle_duration_days_sum[7d]) / rate(deal_cycle_duration_days_count[7d]))
+            type: Prometheus
+    objectives:
+    - displayName: Efficient sales cycle
+      op: lt
+      target: 0.8
+      value: 45
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Contact Creation Rate
+    labels:
+      audience:
+      - product
+      category:
+      - conversion
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - engagement
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: contact-creation-rate
+  spec:
+    budgetingMethod: Occurrences
+    description: Track the rate of new contacts being added to the CRM
+    indicator:
+      metadata:
+        displayName: Daily contact creation count
+        name: contact-growth-velocity
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: sum(rate(contacts_created_total[24h]))
+            type: Prometheus
+    objectives:
+    - displayName: Healthy contact growth
+      op: gte
+      target: 0.85
+      value: 5000
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1M
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Emails Sent Per Active User
+    labels:
+      audience:
+      - product
+      category:
+      - engagement
+      domain:
+      - crm
+      framework:
+      - custom
+      journey-stage:
+      - engagement
+      layer:
+      - business
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: emails-sent-per-user
+  spec:
+    budgetingMethod: Occurrences
+    description: Track average number of emails sent per active user to measure engagement
+    indicator:
+      metadata:
+        displayName: Average emails sent per DAU
+        name: email-activity-per-user
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: sum(rate(emails_sent_total[24h])) / count(count_over_time(user_activity_total[24h])
+                > 0)
+            type: Prometheus
+    objectives:
+    - displayName: Active email engagement
+      op: gte
+      target: 0.8
+      value: 10
+    service: saas-crm-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true

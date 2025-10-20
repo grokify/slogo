@@ -1,0 +1,88 @@
+[
+  {
+    "apiVersion": "openslo/v1",
+    "kind": "SLO",
+    "metadata": {
+      "name": "api-availability",
+      "displayName": "API Service Availability",
+      "labels": {
+        "audience": [
+          "sre"
+        ],
+        "category": [
+          "availability"
+        ],
+        "framework": [
+          "red"
+        ],
+        "layer": [
+          "service"
+        ],
+        "metric-type": [
+          "availability"
+        ],
+        "scope": [
+          "customer-facing"
+        ],
+        "severity": [
+          "critical"
+        ],
+        "tier": [
+          "p0"
+        ]
+      }
+    },
+    "spec": {
+      "description": "Track overall service availability derived from request rate and error rate - ensures service is both reachable and responding successfully",
+      "service": "api-service",
+      "indicator": {
+        "metadata": {
+          "name": "service-availability",
+          "displayName": "Service availability percentage"
+        },
+        "spec": {
+          "ratioMetric": {
+            "counter": false,
+            "good": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(http_requests_total{status=~\"2..|3..\"}[5m]))"
+                }
+              }
+            },
+            "total": {
+              "metricSource": {
+                "type": "Prometheus",
+                "spec": {
+                  "query": "sum(rate(http_requests_total[5m]))"
+                }
+              }
+            }
+          }
+        }
+      },
+      "budgetingMethod": "Timeslices",
+      "timeWindow": [
+        {
+          "duration": "4w",
+          "isRolling": true
+        }
+      ],
+      "objectives": [
+        {
+          "displayName": "Four nines availability",
+          "target": 0.9999,
+          "timeSliceTarget": 0.99,
+          "timeSliceWindow": "5m"
+        },
+        {
+          "displayName": "Three nines availability",
+          "target": 0.999,
+          "timeSliceTarget": 0.95,
+          "timeSliceWindow": "5m"
+        }
+      ]
+    }
+  }
+]

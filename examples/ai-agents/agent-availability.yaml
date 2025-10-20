@@ -1,0 +1,109 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: AI Agent Service Availability
+    labels:
+      audience:
+      - sre
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - errors
+      scope:
+      - customer-facing
+      severity:
+      - critical
+      tier:
+      - p0
+    name: agent-availability
+  spec:
+    budgetingMethod: Timeslices
+    description: Ensure AI agents are available when users need them - successful
+      agent sessions vs total attempts
+    indicator:
+      metadata:
+        displayName: Successful agent session start rate
+        name: agent-session-success-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_session_starts_total{status="success"}[5m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_session_starts_total[5m]))
+              type: Prometheus
+    objectives:
+    - displayName: High availability
+      target: 0.999
+      timeSliceTarget: 0.95
+      timeSliceWindow: 5m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 4w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Per-User Agent Availability
+    labels:
+      audience:
+      - sre
+      category:
+      - quality
+      domain:
+      - ai-ml
+      framework:
+      - red
+      layer:
+      - service
+      metric-type:
+      - errors
+      scope:
+      - customer-facing
+      severity:
+      - critical
+      tier:
+      - p0
+    name: per-user-agent-availability
+  spec:
+    budgetingMethod: Timeslices
+    description: Track agent availability per user to ensure consistent service across
+      all customers
+    indicator:
+      metadata:
+        displayName: Per-user agent session success rate
+        name: user-agent-success-rate
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_session_starts_total{status="success"}[1h]))
+                  / sum by(user_id) (rate(agent_session_starts_total[1h])) >= 0.99)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_session_starts_total[1h])))
+              type: Prometheus
+    objectives:
+    - displayName: Consistent user experience
+      target: 0.95
+      timeSliceTarget: 0.9
+      timeSliceWindow: 1h
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true

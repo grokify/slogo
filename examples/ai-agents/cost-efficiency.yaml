@@ -1,0 +1,198 @@
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Token Usage Efficiency
+    labels:
+      audience:
+      - executive
+      category:
+      - cost
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: token-usage-per-task
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor average token usage per completed task to ensure cost efficiency
+    indicator:
+      metadata:
+        displayName: Average tokens consumed per task
+        name: avg-tokens-per-task
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: sum(rate(agent_tokens_consumed_total[1h])) / sum(rate(agent_tasks_total{status="completed"}[1h]))
+            type: Prometheus
+    objectives:
+    - displayName: Efficient token usage
+      op: lt
+      target: 0.9
+      value: 5000
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Per-User Cost Efficiency
+    labels:
+      audience:
+      - executive
+      category:
+      - cost
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - high
+      tier:
+      - p1
+    name: per-user-cost
+  spec:
+    budgetingMethod: Timeslices
+    description: Track average cost per user to ensure sustainable economics
+    indicator:
+      metadata:
+        displayName: Percentage of users within cost budget
+        name: user-cost-distribution
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_cost_usd_total[1d])) < 5)
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: count(sum by(user_id) (rate(agent_cost_usd_total[1d])))
+              type: Prometheus
+    objectives:
+    - displayName: Cost within budget
+      target: 0.95
+      timeSliceTarget: 0.9
+      timeSliceWindow: 1d
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Cost per Successful Task
+    labels:
+      audience:
+      - executive
+      category:
+      - cost
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - critical
+      tier:
+      - p0
+    name: cost-per-successful-task
+  spec:
+    budgetingMethod: Occurrences
+    description: Monitor cost per successfully completed task to optimize ROI
+    indicator:
+      metadata:
+        displayName: Average cost per successful task in USD
+        name: successful-task-cost
+      spec:
+        thresholdMetric:
+          metricSource:
+            spec:
+              query: sum(rate(agent_cost_usd_total[1h])) / sum(rate(agent_tasks_total{status="completed"}[1h]))
+            type: Prometheus
+    objectives:
+    - displayName: Sustainable unit economics
+      op: lt
+      target: 0.9
+      value: 0.5
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
+- apiVersion: openslo/v1
+  kind: SLO
+  metadata:
+    displayName: Agent Response Cache Hit Rate
+    labels:
+      audience:
+      - executive
+      category:
+      - cost
+      domain:
+      - ai-ml
+      framework:
+      - custom
+      layer:
+      - business
+      metric-type:
+      - efficiency
+      scope:
+      - business-outcome
+      severity:
+      - medium
+      tier:
+      - p2
+    name: cache-hit-rate
+  spec:
+    budgetingMethod: Timeslices
+    description: Track cache hit rate to reduce costs and improve response times
+    indicator:
+      metadata:
+        displayName: Percentage of cacheable requests served from cache
+        name: cache-efficiency
+      spec:
+        ratioMetric:
+          counter: false
+          good:
+            metricSource:
+              spec:
+                query: sum(rate(agent_cache_hits_total[5m]))
+              type: Prometheus
+          total:
+            metricSource:
+              spec:
+                query: sum(rate(agent_cache_requests_total[5m]))
+              type: Prometheus
+    objectives:
+    - displayName: High cache efficiency
+      target: 0.7
+      timeSliceTarget: 0.85
+      timeSliceWindow: 5m
+    service: ai-agent-platform
+    timeWindow:
+    - duration: 1w
+      isRolling: true
