@@ -2,6 +2,11 @@ package requirement
 
 import "github.com/grokify/mogo/time/duration"
 
+const (
+	ActionTypeHTTP = "HTTP"
+	ActionTypeSQL  = "SQL"
+)
+
 type Requirement struct {
 	Name             string        `json:"name"`
 	DisplayName      string        `json:"displayName"`
