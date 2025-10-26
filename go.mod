@@ -5,7 +5,7 @@ go 1.24.5
 require (
 	github.com/OpenSLO/go-sdk v0.8.0
 	github.com/grokify/gocharts/v2 v2.26.0
-	github.com/grokify/mogo v0.71.3
+	github.com/grokify/mogo v0.71.5
 )
 
 require (
@@ -32,7 +32,7 @@ require (
 	github.com/xuri/nfp v0.0.2-0.20250530014748-2ddeb826f9a9 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	golang.org/x/crypto v0.43.0 // indirect
-	golang.org/x/exp v0.0.0-20251017212417-90e834f514db // indirect
+	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
 	golang.org/x/image v0.32.0 // indirect
 	golang.org/x/mod v0.29.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
