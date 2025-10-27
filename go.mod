@@ -5,7 +5,7 @@ go 1.24.5
 require (
 	github.com/OpenSLO/go-sdk v0.8.0
 	github.com/grokify/gocharts/v2 v2.26.0
-	github.com/grokify/mogo v0.71.5
+	github.com/grokify/mogo v0.71.6
 )
 
 require (
