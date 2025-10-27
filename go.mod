@@ -5,11 +5,12 @@ go 1.24.5
 require (
 	github.com/OpenSLO/go-sdk v0.8.0
 	github.com/grokify/gocharts/v2 v2.26.0
-	github.com/grokify/mogo v0.71.5
+	github.com/grokify/mogo v0.71.7
 )
 
 require (
-	github.com/clipperhouse/uax29/v2 v2.2.0 // indirect
+	github.com/clipperhouse/stringish v0.1.1 // indirect
+	github.com/clipperhouse/uax29/v2 v2.3.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/grokify/base36 v1.0.5 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
