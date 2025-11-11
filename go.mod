@@ -5,7 +5,7 @@ go 1.24.5
 require (
 	github.com/OpenSLO/go-sdk v0.8.0
 	github.com/grokify/gocharts/v2 v2.26.0
-	github.com/grokify/mogo v0.71.7
+	github.com/grokify/mogo v0.71.8
 )
 
 require (
@@ -38,7 +38,7 @@ require (
 	golang.org/x/mod v0.29.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
 	gonum.org/v1/gonum v0.16.0 // indirect
