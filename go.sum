@@ -1,5 +1,5 @@
-github.com/OpenSLO/go-sdk v0.8.0 h1:w6r4qybBc98dJ8kGcI0qPOMPVBIhLceC+dgmwGvX5Rg=
-github.com/OpenSLO/go-sdk v0.8.0/go.mod h1:Kn5r0/Dvievh4VD4+aOpJ1/GAYqiUeLz2UXHwbty95o=
+github.com/OpenSLO/go-sdk v0.9.0 h1:k//lQnthYHtv6j/ujqWREgqwqo2zsALO/JBUH1Fc9Ak=
+github.com/OpenSLO/go-sdk v0.9.0/go.mod h1:ch0SE86x4+0r919NnFEMhx0USVkytv+CR8+KkmnoRlY=
 github.com/clipperhouse/displaywidth v0.6.1 h1:/zMlAezfDzT2xy6acHBzwIfyu2ic0hgkT83UX5EY2gY=
 github.com/clipperhouse/displaywidth v0.6.1/go.mod h1:R+kHuzaYWFkTm7xoMmK1lFydbci4X2CicfbGstSGg0o=
 github.com/clipperhouse/stringish v0.1.1 h1:+NSqMOr3GR6k1FdRhhnXrLfztGzuG+VuFDfatpWHKCs=
@@ -30,8 +30,8 @@ github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWE
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/mattn/go-runewidth v0.0.19 h1:v++JhqYnZuu5jSKrk9RbgF5v4CGUjqRfBm05byFGLdw=
 github.com/mattn/go-runewidth v0.0.19/go.mod h1:XBkDxAl56ILZc9knddidhrOlY5R/pDhgLpndooCuJAs=
-github.com/nobl9/govy v0.21.0 h1:RDV8zMbcGpmk9vnyvjM5QLHALqttI5/RG/lQ6hRSyS4=
-github.com/nobl9/govy v0.21.0/go.mod h1:DN0zA5jtaHrb+uKPATycrlr7HRJy27QUaUg8LEeTsxo=
+github.com/nobl9/govy v0.22.0 h1:vTYuwJcV34EKw15sVAjJi1Yz/yx4bHTdjFZWFpnYjX4=
+github.com/nobl9/govy v0.22.0/go.mod h1:DN0zA5jtaHrb+uKPATycrlr7HRJy27QUaUg8LEeTsxo=
 github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6 h1:zrbMGy9YXpIeTnGj4EljqMiZsIcE09mmF8XsD5AYOJc=
 github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6/go.mod h1:rEKTHC9roVVicUIfZK7DYrdIoM0EOr8mK1Hj5s3JjH0=
 github.com/olekukonko/errors v1.1.0 h1:RNuGIh15QdDenh+hNvKrJkmxxjV4hcS50Db478Ou5sM=
