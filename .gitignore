@@ -21,3 +21,6 @@ cmd/parse/
 # Coverage
 *.out
 coverage.html
+
+# MkDocs
+site/
