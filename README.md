@@ -1,10 +1,29 @@
 # SLOGo - Go for Service Level Objectives (SLOs)
 
-[![Build Status][build-status-svg]][build-status-url]
-[![Lint Status][lint-status-svg]][lint-status-url]
+[![Go CI][go-ci-svg]][go-ci-url]
+[![Go Lint][go-lint-svg]][go-lint-url]
+[![Go SAST][go-sast-svg]][go-sast-url]
 [![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
+
+ [go-ci-svg]: https://github.com/grokify/slogo/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/slogo/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/slogo/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/slogo/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/slogo/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/slogo/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/slogo
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/slogo
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/slogo
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/slogo
+ [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fslogo
+ [loc-svg]: https://tokei.rs/b1/github/grokify/slogo
+ [repo-url]: https://github.com/grokify/slogo
+ [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
+ [license-url]: https://github.com/grokify/slogo/blob/master/LICENSE
 
 Go utilities for working with [OpenSLO](https://github.com/OpenSLO/OpenSLO) (Service Level Objectives) specifications.
 
@@ -227,14 +246,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [Measuring Product Health](https://www.reforge.com/blog/retention-engagement-growth-silent-killer) - Reforge
 - [SaaS Metrics 2.0](https://www.forentrepreneurs.com/saas-metrics-2/) - For Entrepreneurs
 - [The Lean Analytics Book](https://leananalyticsbook.com/) - Alistair Croll & Benjamin Yoskovitz
-
- [build-status-svg]: https://github.com/grokify/slogo/actions/workflows/ci.yaml/badge.svg?branch=main
- [build-status-url]: https://github.com/grokify/slogo/actions/workflows/ci.yaml
- [lint-status-svg]: https://github.com/grokify/slogo/actions/workflows/lint.yaml/badge.svg?branch=main
- [lint-status-url]: https://github.com/grokify/slogo/actions/workflows/lint.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/slogo
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/slogo
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/slogo
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/slogo
- [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/slogo/blob/master/LICENSE
