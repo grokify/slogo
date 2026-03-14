@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -23,7 +24,7 @@ func ExampleAgentAvailabilitySLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryQuality,
 				ontology.LabelSeverity:   ontology.SeverityCritical,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				business.LabelDomain:     business.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeErrors,
 			})},
 		v1.SLOSpec{
@@ -87,7 +88,7 @@ func ExamplePerUserAgentAvailabilitySLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryQuality,
 				ontology.LabelSeverity:   ontology.SeverityCritical,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				business.LabelDomain:     business.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeErrors,
 			})},
 		v1.SLOSpec{

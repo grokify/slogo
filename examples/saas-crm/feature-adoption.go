@@ -5,6 +5,8 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
+	"github.com/grokify/slogo/ontologies/domains/product"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,8 +24,8 @@ func ExampleContactManagementUsageSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryEngagement,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainCRM,
-				ontology.LabelMetricType: ontology.MetricTypeAdoption,
+				business.LabelDomain:     business.DomainCRM,
+				ontology.LabelMetricType: product.MetricTypeAdoption,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who regularly use contact management features",
@@ -86,8 +88,8 @@ func ExampleDealPipelineUsageSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryEngagement,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainCRM,
-				ontology.LabelMetricType: ontology.MetricTypeAdoption,
+				business.LabelDomain:     business.DomainCRM,
+				ontology.LabelMetricType: product.MetricTypeAdoption,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users managing deals in the pipeline",
@@ -150,8 +152,8 @@ func ExampleEmailIntegrationUsageSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryEngagement,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainCRM,
-				ontology.LabelMetricType: ontology.MetricTypeAdoption,
+				business.LabelDomain:     business.DomainCRM,
+				ontology.LabelMetricType: product.MetricTypeAdoption,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users with active email integration",
@@ -214,8 +216,8 @@ func ExampleReportingUsageSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryEngagement,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainCRM,
-				ontology.LabelMetricType: ontology.MetricTypeAdoption,
+				business.LabelDomain:     business.DomainCRM,
+				ontology.LabelMetricType: product.MetricTypeAdoption,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who view reports or dashboards",
@@ -278,8 +280,8 @@ func ExampleMobileAppUsageSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryEngagement,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainCRM,
-				ontology.LabelMetricType: ontology.MetricTypeAdoption,
+				business.LabelDomain:     business.DomainCRM,
+				ontology.LabelMetricType: product.MetricTypeAdoption,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of active users who use the mobile app",

@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,7 +23,7 @@ func ExampleDailyActiveUsersSLO() v1.SLO {
 				ontology.LabelCategory:  ontology.CategoryEngagement,
 				ontology.LabelSeverity:  ontology.SeverityHigh,
 				ontology.LabelTier:      ontology.TierP1,
-				ontology.LabelDomain:    ontology.DomainAIML,
+				business.LabelDomain:    business.DomainAIML,
 			})},
 		v1.SLOSpec{
 			Description: "Track daily active users to monitor platform adoption and engagement",
@@ -75,7 +76,7 @@ func ExampleUserRetentionSLO() v1.SLO {
 				ontology.LabelCategory:  ontology.CategoryEngagement,
 				ontology.LabelSeverity:  ontology.SeverityCritical,
 				ontology.LabelTier:      ontology.TierP0,
-				ontology.LabelDomain:    ontology.DomainAIML,
+				business.LabelDomain:    business.DomainAIML,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who return within 7 days of first use",
@@ -138,7 +139,7 @@ func ExampleSessionDurationSLO() v1.SLO {
 				ontology.LabelCategory:  ontology.CategoryEngagement,
 				ontology.LabelSeverity:  ontology.SeverityMedium,
 				ontology.LabelTier:      ontology.TierP2,
-				ontology.LabelDomain:    ontology.DomainAIML,
+				business.LabelDomain:    business.DomainAIML,
 			})},
 		v1.SLOSpec{
 			Description: "Track average session duration to measure user engagement depth",
@@ -191,7 +192,7 @@ func ExampleConversationTurnsSLO() v1.SLO {
 				ontology.LabelCategory:  ontology.CategoryEngagement,
 				ontology.LabelSeverity:  ontology.SeverityMedium,
 				ontology.LabelTier:      ontology.TierP2,
-				ontology.LabelDomain:    ontology.DomainAIML,
+				business.LabelDomain:    business.DomainAIML,
 			})},
 		v1.SLOSpec{
 			Description: "Track average conversation turns to measure engagement and agent helpfulness",

@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,7 +23,7 @@ func ExampleAgentResponseQualitySLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryQuality,
 				ontology.LabelSeverity:   ontology.SeverityHigh,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				business.LabelDomain:     business.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
 			})},
 		v1.SLOSpec{
@@ -86,7 +87,7 @@ func ExamplePerUserResponseQualitySLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryQuality,
 				ontology.LabelSeverity:   ontology.SeverityHigh,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				business.LabelDomain:     business.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
 			})},
 		v1.SLOSpec{
@@ -150,7 +151,7 @@ func ExampleAgentAccuracySLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryQuality,
 				ontology.LabelSeverity:   ontology.SeverityCritical,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
+				business.LabelDomain:     business.DomainAIML,
 				ontology.LabelMetricType: ontology.MetricTypeSatisfaction,
 			})},
 		v1.SLOSpec{

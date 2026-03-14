@@ -12,7 +12,8 @@ func NewLabels(labels map[string]string) v1.Labels {
 	return result
 }
 
-// GetLabelDefinitions returns all possible label values for each label type
+// GetLabelDefinitions returns all possible values for each core label type.
+// Domain-specific label definitions are available in ontologies/domains/ packages.
 func GetLabelDefinitions() map[string][]string {
 	return map[string][]string{
 		LabelFramework: {
@@ -71,10 +72,6 @@ func GetLabelDefinitions() map[string][]string {
 			MetricTypeUtilization,
 			MetricTypeSaturation,
 			MetricTypeSatisfaction,
-			MetricTypeStickiness,
-			MetricTypeRetention,
-			MetricTypeActivation,
-			MetricTypeAdoption,
 			MetricTypeEfficiency,
 		},
 		LabelResourceType: {
@@ -84,20 +81,10 @@ func GetLabelDefinitions() map[string][]string {
 			ResourceTypeNetwork,
 			ResourceTypeGPU,
 		},
-		LabelDomain: {
-			DomainAIML,
-			DomainCRM,
-			DomainSaaS,
-			DomainEcommerce,
-			DomainFintech,
-		},
-		LabelJourneyStage: {
-			JourneyStageAcquisition,
-			JourneyStageActivation,
-			JourneyStageEngagement,
-			JourneyStageRetention,
-			JourneyStageRevenue,
-			JourneyStageReferral,
+		LabelEnvironment: {
+			EnvironmentProduction,
+			EnvironmentStaging,
+			EnvironmentDev,
 		},
 	}
 }

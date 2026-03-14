@@ -5,6 +5,8 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
+	"github.com/grokify/slogo/ontologies/domains/product"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -15,16 +17,16 @@ func ExampleUserActivationSLO() v1.SLO {
 			Name:        "user-activation-rate",
 			DisplayName: "New User Activation Rate",
 			Labels: ontology.NewLabels(map[string]string{
-				ontology.LabelFramework:    ontology.FrameworkCustom,
-				ontology.LabelLayer:        ontology.LayerBusiness,
-				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
-				ontology.LabelAudience:     ontology.AudienceProduct,
-				ontology.LabelCategory:     ontology.CategoryConversion,
-				ontology.LabelSeverity:     ontology.SeverityHigh,
-				ontology.LabelTier:         ontology.TierP0,
-				ontology.LabelDomain:       ontology.DomainCRM,
-				ontology.LabelMetricType:   ontology.MetricTypeActivation,
-				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+				ontology.LabelFramework:   ontology.FrameworkCustom,
+				ontology.LabelLayer:       ontology.LayerBusiness,
+				ontology.LabelScope:       ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:    ontology.AudienceProduct,
+				ontology.LabelCategory:    ontology.CategoryConversion,
+				ontology.LabelSeverity:    ontology.SeverityHigh,
+				ontology.LabelTier:        ontology.TierP0,
+				business.LabelDomain:      business.DomainCRM,
+				ontology.LabelMetricType:  product.MetricTypeActivation,
+				product.LabelJourneyStage: product.JourneyStageActivation,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of new users who complete core activation steps within first 7 days",
@@ -80,16 +82,16 @@ func ExampleTimeToFirstValueSLO() v1.SLO {
 			Name:        "time-to-first-value",
 			DisplayName: "Time to First Value",
 			Labels: ontology.NewLabels(map[string]string{
-				ontology.LabelFramework:    ontology.FrameworkCustom,
-				ontology.LabelLayer:        ontology.LayerBusiness,
-				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
-				ontology.LabelAudience:     ontology.AudienceProduct,
-				ontology.LabelCategory:     ontology.CategoryConversion,
-				ontology.LabelSeverity:     ontology.SeverityHigh,
-				ontology.LabelTier:         ontology.TierP1,
-				ontology.LabelDomain:       ontology.DomainCRM,
-				ontology.LabelMetricType:   ontology.MetricTypeActivation,
-				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+				ontology.LabelFramework:   ontology.FrameworkCustom,
+				ontology.LabelLayer:       ontology.LayerBusiness,
+				ontology.LabelScope:       ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:    ontology.AudienceProduct,
+				ontology.LabelCategory:    ontology.CategoryConversion,
+				ontology.LabelSeverity:    ontology.SeverityHigh,
+				ontology.LabelTier:        ontology.TierP1,
+				business.LabelDomain:      business.DomainCRM,
+				ontology.LabelMetricType:  product.MetricTypeActivation,
+				product.LabelJourneyStage: product.JourneyStageActivation,
 			})},
 		v1.SLOSpec{
 			Description: "Track how quickly new users create their first contact or deal",
@@ -145,16 +147,16 @@ func ExampleOnboardingCompletionSLO() v1.SLO {
 			Name:        "onboarding-completion",
 			DisplayName: "Onboarding Completion Rate",
 			Labels: ontology.NewLabels(map[string]string{
-				ontology.LabelFramework:    ontology.FrameworkCustom,
-				ontology.LabelLayer:        ontology.LayerBusiness,
-				ontology.LabelScope:        ontology.ScopeBusinessOutcome,
-				ontology.LabelAudience:     ontology.AudienceProduct,
-				ontology.LabelCategory:     ontology.CategoryConversion,
-				ontology.LabelSeverity:     ontology.SeverityHigh,
-				ontology.LabelTier:         ontology.TierP1,
-				ontology.LabelDomain:       ontology.DomainCRM,
-				ontology.LabelMetricType:   ontology.MetricTypeActivation,
-				ontology.LabelJourneyStage: ontology.JourneyStageActivation,
+				ontology.LabelFramework:   ontology.FrameworkCustom,
+				ontology.LabelLayer:       ontology.LayerBusiness,
+				ontology.LabelScope:       ontology.ScopeBusinessOutcome,
+				ontology.LabelAudience:    ontology.AudienceProduct,
+				ontology.LabelCategory:    ontology.CategoryConversion,
+				ontology.LabelSeverity:    ontology.SeverityHigh,
+				ontology.LabelTier:        ontology.TierP1,
+				business.LabelDomain:      business.DomainCRM,
+				ontology.LabelMetricType:  product.MetricTypeActivation,
+				product.LabelJourneyStage: product.JourneyStageActivation,
 			})},
 		v1.SLOSpec{
 			Description: "Track percentage of users who complete the full onboarding checklist",

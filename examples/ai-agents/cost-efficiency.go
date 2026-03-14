@@ -5,6 +5,8 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
+	"github.com/grokify/slogo/ontologies/domains/product"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,8 +24,8 @@ func ExampleTokenUsagePerTaskSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryCost,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainAIML,
-				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+				business.LabelDomain:     business.DomainAIML,
+				ontology.LabelMetricType: product.MetricTypeEfficiency,
 			})},
 		v1.SLOSpec{
 			Description: "Monitor average token usage per completed task to ensure cost efficiency",
@@ -76,8 +78,8 @@ func ExamplePerUserCostSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryCost,
 				ontology.LabelSeverity:   ontology.SeverityHigh,
 				ontology.LabelTier:       ontology.TierP1,
-				ontology.LabelDomain:     ontology.DomainAIML,
-				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+				business.LabelDomain:     business.DomainAIML,
+				ontology.LabelMetricType: product.MetricTypeEfficiency,
 			})},
 		v1.SLOSpec{
 			Description: "Track average cost per user to ensure sustainable economics",
@@ -140,8 +142,8 @@ func ExampleCostPerSuccessfulTaskSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryCost,
 				ontology.LabelSeverity:   ontology.SeverityCritical,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainAIML,
-				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+				business.LabelDomain:     business.DomainAIML,
+				ontology.LabelMetricType: product.MetricTypeEfficiency,
 			})},
 		v1.SLOSpec{
 			Description: "Monitor cost per successfully completed task to optimize ROI",
@@ -194,8 +196,8 @@ func ExampleCacheHitRateSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryCost,
 				ontology.LabelSeverity:   ontology.SeverityMedium,
 				ontology.LabelTier:       ontology.TierP2,
-				ontology.LabelDomain:     ontology.DomainAIML,
-				ontology.LabelMetricType: ontology.MetricTypeEfficiency,
+				business.LabelDomain:     business.DomainAIML,
+				ontology.LabelMetricType: product.MetricTypeEfficiency,
 			})},
 		v1.SLOSpec{
 			Description: "Track cache hit rate to reduce costs and improve response times",

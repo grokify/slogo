@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,7 +23,7 @@ func ExampleRatioTimeSlicesSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryAvailability,
 				ontology.LabelSeverity:   ontology.SeverityCritical,
 				ontology.LabelTier:       ontology.TierP0,
-				ontology.LabelDomain:     ontology.DomainEcommerce,
+				business.LabelDomain:     business.DomainEcommerce,
 				ontology.LabelMetricType: ontology.MetricTypeAvailability,
 			})},
 		v1.SLOSpec{

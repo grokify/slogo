@@ -5,6 +5,7 @@ import (
 	"github.com/grokify/mogo/pointer"
 
 	"github.com/grokify/slogo"
+	"github.com/grokify/slogo/ontologies/domains/business"
 	"github.com/grokify/slogo/ontology"
 )
 
@@ -22,7 +23,7 @@ func ExampleOccurrencesSLO() v1.SLO {
 				ontology.LabelCategory:   ontology.CategoryLatency,
 				ontology.LabelSeverity:   ontology.SeverityHigh,
 				ontology.LabelTier:       ontology.TierP1,
-				ontology.LabelDomain:     ontology.DomainEcommerce,
+				business.LabelDomain:     business.DomainEcommerce,
 				ontology.LabelMetricType: ontology.MetricTypeDuration,
 			})},
 		v1.SLOSpec{
