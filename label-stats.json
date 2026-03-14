@@ -1,0 +1,997 @@
+{
+  "examples/ai-agents": {
+    "directory": "examples/ai-agents",
+    "total_slos": 20,
+    "label_distributions": {
+      "audience": {
+        "label_name": "audience",
+        "histogram": {
+          "Name": "audience",
+          "Bins": {
+            "customer-success": 0,
+            "engineering": 0,
+            "executive": 0,
+            "product": 3,
+            "sre": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "category": {
+        "label_name": "category",
+        "histogram": {
+          "Name": "category",
+          "Bins": {
+            "availability": 1,
+            "compliance": 0,
+            "conversion": 0,
+            "cost": 1,
+            "engagement": 0,
+            "latency": 0,
+            "quality": 1,
+            "resource": 0,
+            "security": 0,
+            "throughput": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "domain": {
+        "label_name": "domain",
+        "histogram": {
+          "Name": "domain",
+          "Bins": {
+            "ai-ml": 3,
+            "crm": 0,
+            "ecommerce": 0,
+            "fintech": 0,
+            "saas": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "framework": {
+        "label_name": "framework",
+        "histogram": {
+          "Name": "framework",
+          "Bins": {
+            "custom": 3,
+            "red": 0,
+            "use": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "journey-stage": {
+        "label_name": "journey-stage",
+        "histogram": {
+          "Name": "journey-stage",
+          "Bins": {
+            "acquisition": 0,
+            "activation": 0,
+            "engagement": 0,
+            "referral": 0,
+            "retention": 0,
+            "revenue": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "layer": {
+        "label_name": "layer",
+        "histogram": {
+          "Name": "layer",
+          "Bins": {
+            "application": 0,
+            "business": 3,
+            "infrastructure": 0,
+            "service": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "metric-type": {
+        "label_name": "metric-type",
+        "histogram": {
+          "Name": "metric-type",
+          "Bins": {
+            "activation": 0,
+            "adoption": 0,
+            "duration": 0,
+            "efficiency": 1,
+            "errors": 0,
+            "rate": 0,
+            "retention": 0,
+            "satisfaction": 1,
+            "saturation": 0,
+            "stickiness": 0,
+            "utilization": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 2
+      },
+      "resource-type": {
+        "label_name": "resource-type",
+        "histogram": {
+          "Name": "resource-type",
+          "Bins": {
+            "cpu": 0,
+            "disk": 0,
+            "gpu": 0,
+            "memory": 0,
+            "network": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "scope": {
+        "label_name": "scope",
+        "histogram": {
+          "Name": "scope",
+          "Bins": {
+            "business-outcome": 1,
+            "customer-facing": 2,
+            "internal": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "severity": {
+        "label_name": "severity",
+        "histogram": {
+          "Name": "severity",
+          "Bins": {
+            "critical": 1,
+            "high": 1,
+            "info": 0,
+            "low": 0,
+            "medium": 1
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "tier": {
+        "label_name": "tier",
+        "histogram": {
+          "Name": "tier",
+          "Bins": {
+            "p0": 2,
+            "p1": 1,
+            "p2": 0,
+            "p3": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      }
+    }
+  },
+  "examples/budgeting-method": {
+    "directory": "examples/budgeting-method",
+    "total_slos": 3,
+    "label_distributions": {
+      "audience": {
+        "label_name": "audience",
+        "histogram": {
+          "Name": "audience",
+          "Bins": {
+            "customer-success": 0,
+            "engineering": 0,
+            "executive": 0,
+            "product": 0,
+            "sre": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "category": {
+        "label_name": "category",
+        "histogram": {
+          "Name": "category",
+          "Bins": {
+            "availability": 0,
+            "compliance": 0,
+            "conversion": 0,
+            "cost": 0,
+            "engagement": 0,
+            "latency": 0,
+            "quality": 0,
+            "resource": 0,
+            "security": 0,
+            "throughput": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "domain": {
+        "label_name": "domain",
+        "histogram": {
+          "Name": "domain",
+          "Bins": {
+            "ai-ml": 0,
+            "crm": 0,
+            "ecommerce": 0,
+            "fintech": 0,
+            "saas": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "framework": {
+        "label_name": "framework",
+        "histogram": {
+          "Name": "framework",
+          "Bins": {
+            "custom": 0,
+            "red": 0,
+            "use": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "journey-stage": {
+        "label_name": "journey-stage",
+        "histogram": {
+          "Name": "journey-stage",
+          "Bins": {
+            "acquisition": 0,
+            "activation": 0,
+            "engagement": 0,
+            "referral": 0,
+            "retention": 0,
+            "revenue": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "layer": {
+        "label_name": "layer",
+        "histogram": {
+          "Name": "layer",
+          "Bins": {
+            "application": 0,
+            "business": 0,
+            "infrastructure": 0,
+            "service": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "metric-type": {
+        "label_name": "metric-type",
+        "histogram": {
+          "Name": "metric-type",
+          "Bins": {
+            "activation": 0,
+            "adoption": 0,
+            "duration": 0,
+            "efficiency": 0,
+            "errors": 0,
+            "rate": 0,
+            "retention": 0,
+            "satisfaction": 0,
+            "saturation": 0,
+            "stickiness": 0,
+            "utilization": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "resource-type": {
+        "label_name": "resource-type",
+        "histogram": {
+          "Name": "resource-type",
+          "Bins": {
+            "cpu": 0,
+            "disk": 0,
+            "gpu": 0,
+            "memory": 0,
+            "network": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "scope": {
+        "label_name": "scope",
+        "histogram": {
+          "Name": "scope",
+          "Bins": {
+            "business-outcome": 0,
+            "customer-facing": 0,
+            "internal": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "severity": {
+        "label_name": "severity",
+        "histogram": {
+          "Name": "severity",
+          "Bins": {
+            "critical": 0,
+            "high": 0,
+            "info": 0,
+            "low": 0,
+            "medium": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "tier": {
+        "label_name": "tier",
+        "histogram": {
+          "Name": "tier",
+          "Bins": {
+            "p0": 0,
+            "p1": 0,
+            "p2": 0,
+            "p3": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      }
+    }
+  },
+  "examples/red-metrics": {
+    "directory": "examples/red-metrics",
+    "total_slos": 4,
+    "label_distributions": {
+      "audience": {
+        "label_name": "audience",
+        "histogram": {
+          "Name": "audience",
+          "Bins": {
+            "customer-success": 0,
+            "engineering": 0,
+            "executive": 0,
+            "product": 0,
+            "sre": 4
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "category": {
+        "label_name": "category",
+        "histogram": {
+          "Name": "category",
+          "Bins": {
+            "availability": 0,
+            "compliance": 0,
+            "conversion": 0,
+            "cost": 0,
+            "engagement": 0,
+            "latency": 2,
+            "quality": 1,
+            "resource": 0,
+            "security": 0,
+            "throughput": 1
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "domain": {
+        "label_name": "domain",
+        "histogram": {
+          "Name": "domain",
+          "Bins": {
+            "ai-ml": 0,
+            "crm": 0,
+            "ecommerce": 0,
+            "fintech": 0,
+            "saas": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "framework": {
+        "label_name": "framework",
+        "histogram": {
+          "Name": "framework",
+          "Bins": {
+            "custom": 0,
+            "red": 4,
+            "use": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "journey-stage": {
+        "label_name": "journey-stage",
+        "histogram": {
+          "Name": "journey-stage",
+          "Bins": {
+            "acquisition": 0,
+            "activation": 0,
+            "engagement": 0,
+            "referral": 0,
+            "retention": 0,
+            "revenue": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "layer": {
+        "label_name": "layer",
+        "histogram": {
+          "Name": "layer",
+          "Bins": {
+            "application": 0,
+            "business": 0,
+            "infrastructure": 0,
+            "service": 4
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "metric-type": {
+        "label_name": "metric-type",
+        "histogram": {
+          "Name": "metric-type",
+          "Bins": {
+            "activation": 0,
+            "adoption": 0,
+            "duration": 2,
+            "efficiency": 0,
+            "errors": 1,
+            "rate": 1,
+            "retention": 0,
+            "satisfaction": 0,
+            "saturation": 0,
+            "stickiness": 0,
+            "utilization": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "resource-type": {
+        "label_name": "resource-type",
+        "histogram": {
+          "Name": "resource-type",
+          "Bins": {
+            "cpu": 0,
+            "disk": 0,
+            "gpu": 0,
+            "memory": 0,
+            "network": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "scope": {
+        "label_name": "scope",
+        "histogram": {
+          "Name": "scope",
+          "Bins": {
+            "business-outcome": 0,
+            "customer-facing": 4,
+            "internal": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "severity": {
+        "label_name": "severity",
+        "histogram": {
+          "Name": "severity",
+          "Bins": {
+            "critical": 1,
+            "high": 2,
+            "info": 0,
+            "low": 0,
+            "medium": 1
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      },
+      "tier": {
+        "label_name": "tier",
+        "histogram": {
+          "Name": "tier",
+          "Bins": {
+            "p0": 2,
+            "p1": 2,
+            "p2": 0,
+            "p3": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 4
+      }
+    }
+  },
+  "examples/saas-crm": {
+    "directory": "examples/saas-crm",
+    "total_slos": 24,
+    "label_distributions": {
+      "audience": {
+        "label_name": "audience",
+        "histogram": {
+          "Name": "audience",
+          "Bins": {
+            "customer-success": 0,
+            "engineering": 0,
+            "executive": 0,
+            "product": 5,
+            "sre": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "category": {
+        "label_name": "category",
+        "histogram": {
+          "Name": "category",
+          "Bins": {
+            "availability": 0,
+            "compliance": 0,
+            "conversion": 2,
+            "cost": 0,
+            "engagement": 3,
+            "latency": 0,
+            "quality": 0,
+            "resource": 0,
+            "security": 0,
+            "throughput": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "domain": {
+        "label_name": "domain",
+        "histogram": {
+          "Name": "domain",
+          "Bins": {
+            "ai-ml": 0,
+            "crm": 5,
+            "ecommerce": 0,
+            "fintech": 0,
+            "saas": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "framework": {
+        "label_name": "framework",
+        "histogram": {
+          "Name": "framework",
+          "Bins": {
+            "custom": 5,
+            "red": 0,
+            "use": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "journey-stage": {
+        "label_name": "journey-stage",
+        "histogram": {
+          "Name": "journey-stage",
+          "Bins": {
+            "acquisition": 0,
+            "activation": 1,
+            "engagement": 3,
+            "referral": 0,
+            "retention": 1,
+            "revenue": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "layer": {
+        "label_name": "layer",
+        "histogram": {
+          "Name": "layer",
+          "Bins": {
+            "application": 0,
+            "business": 5,
+            "infrastructure": 0,
+            "service": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "metric-type": {
+        "label_name": "metric-type",
+        "histogram": {
+          "Name": "metric-type",
+          "Bins": {
+            "activation": 1,
+            "adoption": 0,
+            "duration": 0,
+            "efficiency": 0,
+            "errors": 0,
+            "rate": 0,
+            "retention": 1,
+            "satisfaction": 0,
+            "saturation": 0,
+            "stickiness": 1,
+            "utilization": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "resource-type": {
+        "label_name": "resource-type",
+        "histogram": {
+          "Name": "resource-type",
+          "Bins": {
+            "cpu": 0,
+            "disk": 0,
+            "gpu": 0,
+            "memory": 0,
+            "network": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "scope": {
+        "label_name": "scope",
+        "histogram": {
+          "Name": "scope",
+          "Bins": {
+            "business-outcome": 5,
+            "customer-facing": 0,
+            "internal": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "severity": {
+        "label_name": "severity",
+        "histogram": {
+          "Name": "severity",
+          "Bins": {
+            "critical": 1,
+            "high": 4,
+            "info": 0,
+            "low": 0,
+            "medium": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      },
+      "tier": {
+        "label_name": "tier",
+        "histogram": {
+          "Name": "tier",
+          "Bins": {
+            "p0": 5,
+            "p1": 0,
+            "p2": 0,
+            "p3": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 5
+      }
+    }
+  },
+  "examples/use-metrics": {
+    "directory": "examples/use-metrics",
+    "total_slos": 11,
+    "label_distributions": {
+      "audience": {
+        "label_name": "audience",
+        "histogram": {
+          "Name": "audience",
+          "Bins": {
+            "customer-success": 0,
+            "engineering": 0,
+            "executive": 0,
+            "product": 0,
+            "sre": 3
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "category": {
+        "label_name": "category",
+        "histogram": {
+          "Name": "category",
+          "Bins": {
+            "availability": 0,
+            "compliance": 0,
+            "conversion": 0,
+            "cost": 0,
+            "engagement": 0,
+            "latency": 0,
+            "quality": 0,
+            "resource": 3,
+            "security": 0,
+            "throughput": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "domain": {
+        "label_name": "domain",
+        "histogram": {
+          "Name": "domain",
+          "Bins": {
+            "ai-ml": 0,
+            "crm": 0,
+            "ecommerce": 0,
+            "fintech": 0,
+            "saas": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "framework": {
+        "label_name": "framework",
+        "histogram": {
+          "Name": "framework",
+          "Bins": {
+            "custom": 0,
+            "red": 0,
+            "use": 3
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "journey-stage": {
+        "label_name": "journey-stage",
+        "histogram": {
+          "Name": "journey-stage",
+          "Bins": {
+            "acquisition": 0,
+            "activation": 0,
+            "engagement": 0,
+            "referral": 0,
+            "retention": 0,
+            "revenue": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 0
+      },
+      "layer": {
+        "label_name": "layer",
+        "histogram": {
+          "Name": "layer",
+          "Bins": {
+            "application": 0,
+            "business": 0,
+            "infrastructure": 3,
+            "service": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "metric-type": {
+        "label_name": "metric-type",
+        "histogram": {
+          "Name": "metric-type",
+          "Bins": {
+            "activation": 0,
+            "adoption": 0,
+            "duration": 0,
+            "efficiency": 0,
+            "errors": 0,
+            "rate": 0,
+            "retention": 0,
+            "satisfaction": 0,
+            "saturation": 0,
+            "stickiness": 0,
+            "utilization": 3
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "resource-type": {
+        "label_name": "resource-type",
+        "histogram": {
+          "Name": "resource-type",
+          "Bins": {
+            "cpu": 1,
+            "disk": 1,
+            "gpu": 0,
+            "memory": 1,
+            "network": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "scope": {
+        "label_name": "scope",
+        "histogram": {
+          "Name": "scope",
+          "Bins": {
+            "business-outcome": 0,
+            "customer-facing": 0,
+            "internal": 3
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "severity": {
+        "label_name": "severity",
+        "histogram": {
+          "Name": "severity",
+          "Bins": {
+            "critical": 0,
+            "high": 2,
+            "info": 0,
+            "low": 0,
+            "medium": 1
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      },
+      "tier": {
+        "label_name": "tier",
+        "histogram": {
+          "Name": "tier",
+          "Bins": {
+            "p0": 1,
+            "p1": 2,
+            "p2": 0,
+            "p3": 0
+          },
+          "Counts": null,
+          "Percentages": null,
+          "Order": null
+        },
+        "total_metrics": 3
+      }
+    }
+  }
+}
