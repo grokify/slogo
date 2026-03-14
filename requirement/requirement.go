@@ -1,6 +1,8 @@
 package requirement
 
 import (
+	"strconv"
+
 	"github.com/grokify/mogo/cmp/cmputil"
 	"github.com/grokify/mogo/time/duration"
 )
@@ -20,17 +22,61 @@ const (
 )
 
 type Requirement struct {
-	Name             string              `json:"name" yaml:"name"`
-	DisplayName      string              `json:"displayName" yaml:"displayName"`
-	Description      string              `json:"description" yaml:"description"`
-	Goal             float64             `json:"goal" yaml:"goal"`
-	Comparison       cmputil.Operator    `json:"comparison" yaml:"comparison"` // GTE, LTE, GT, LT
-	TimeTarget       duration.Spec       `json:"timeTarget" yaml:"timeTarget"`
-	EvaluationWindow duration.Spec       `json:"evaluationWindow" yaml:"evaluationWindow"`
-	Severity         Severity            `json:"severity" yaml:"severity"`
-	Owner            string              `json:"owner" yaml:"owner"`
-	Action           ActionSpec          `json:"action" yaml:"action"`
-	Labels           map[string][]string `json:"labels" yaml:"labels"`
+	Name        string `json:"name" yaml:"name"`
+	DisplayName string `json:"displayName" yaml:"displayName"`
+	Summary     string `json:"summary" yaml:"summary"`
+	Description string `json:"description" yaml:"description"`
+	// Goal        float64 `json:"goal" yaml:"goal"`
+	// Comparison       cmputil.Operator    `json:"comparison" yaml:"comparison"` // gt/gte/lt/lte
+	// TimeTarget       duration.Spec       `json:"timeTarget" yaml:"timeTarget"`
+	Target Target `json:"target" yaml:"target"`
+	// DurationGoal DurationGoal `json:"durationGoal" yaml:"durationGoal"`
+	// RateGoal     RateGoal     `json:"rateGoal" yaml:"rateGoal"`
+	// EvaluationWindow duration.Spec       `json:"evaluationWindow" yaml:"evaluationWindow"`
+	Severity Severity            `json:"severity" yaml:"severity"`
+	Owner    string              `json:"owner" yaml:"owner"`
+	Action   ActionSpec          `json:"action" yaml:"action"`
+	Labels   map[string][]string `json:"labels" yaml:"labels"`
+}
+
+func (t Target) DurationComparisonString() string {
+	if t.DurationGoal != nil {
+		return string(t.DurationGoal.Comparison)
+	} else {
+		return ""
+	}
+}
+
+func (t Target) DurationUnitString() string {
+	if t.DurationGoal != nil {
+		return string(t.DurationGoal.Duration.Unit)
+	} else {
+		return ""
+	}
+}
+
+func (t Target) DurationValueString() string {
+	if t.DurationGoal != nil {
+		return strconv.Itoa(int(t.DurationGoal.Duration.Value))
+	} else {
+		return ""
+	}
+}
+
+type Target struct {
+	DurationGoal *DurationGoal `json:"durationGoal" yaml:"durationGoal"`
+	RateGoal     RateGoal      `json:"rateGoal" yaml:"rateGoal"`
+}
+
+type RateGoal struct {
+	Value            float64          `json:"value" yaml:"value"`
+	Comparison       cmputil.Operator `json:"comparison" yaml:"comparison"` // gt/gte/lt/lte
+	EvaluationWindow duration.Spec    `json:"evaluationWindow" yaml:"evaluationWindow"`
+}
+
+type DurationGoal struct {
+	Duration   duration.Spec
+	Comparison cmputil.Operator `json:"comparison" yaml:"comparison"` // gt/gte/lt/lte
 }
 
 // ActionSpec describes the target action or process for the SLORequirement.
