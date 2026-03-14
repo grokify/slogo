@@ -1,0 +1,97 @@
+{
+  "irVersion": "1.0",
+  "project": "slogo",
+  "repository": "https://github.com/grokify/slogo",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.3.0",
+      "date": "2026-03-14",
+      "highlights": [
+        { "description": "Domain-specific ontology packages as opt-in imports while keeping core slogo generic" },
+        { "description": "Alert condition builders for OpenSLO alert policies with burn rate configuration" }
+      ],
+      "added": [
+        { "description": "Alert condition builders and helpers for OpenSLO alert policies", "commit": "a90d564" },
+        { "description": "AlertSeverity type with critical, high, medium, low, info levels", "commit": "a90d564" },
+        { "description": "Requirement types with Target containing RateGoal and DurationGoal", "commit": "92adc13" },
+        { "description": "Requirements slice type with Table() method for rendering summaries", "commit": "92adc13" },
+        { "description": "CLI tool `gen-examples-json-yaml` for generating JSON/YAML from example SLOs", "commit": "ed2c1e7" },
+        { "description": "CLI tool `gen-metrics-doc` for generating METRICS.md documentation", "commit": "ed2c1e7" },
+        { "description": "CLI tool `label-stats` for analyzing label usage across examples", "commit": "ed2c1e7" },
+        { "description": "Datadog HCL converter stub for Terraform integration", "commit": "f76c7e1" },
+        { "description": "Domain ontology package `ontologies/domains/iam` for IAM/IGA labels", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/product` for AARRR journey stages", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/business` for business verticals", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/saas` for multi-tenancy labels", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/security` for security labels", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/compliance` for regulatory frameworks", "commit": "48d1c9a" },
+        { "description": "Domain ontology package `ontologies/domains/operations` for operational processes", "commit": "48d1c9a" }
+      ],
+      "changed": [
+        { "description": "Core ontology reduced to 12 generic SLO labels (framework, layer, scope, audience, category, severity, tier, metric-type, resource-type, service, team, environment)", "commit": "48d1c9a" },
+        { "description": "Domain-specific labels moved to opt-in `ontologies/domains/` packages", "commit": "48d1c9a", "breaking": true }
+      ],
+      "upgradeGuide": [
+        { "description": "Import domain packages for domain-specific labels: `ontologies/domains/business`, `ontologies/domains/product`, etc." },
+        { "description": "Replace `ontology.LabelDomain` with `business.LabelDomain`" },
+        { "description": "Replace `ontology.LabelJourneyStage` with `product.LabelJourneyStage`" }
+      ],
+      "dependencies": [
+        { "description": "Update github.com/OpenSLO/go-sdk from 0.8.0 to 0.9.1", "commit": "49bacee" },
+        { "description": "Update github.com/grokify/mogo from 0.72.0 to 0.73.5", "commit": "083a86d" },
+        { "description": "Update github.com/grokify/gocharts/v2 from 2.26.0 to 2.26.9", "commit": "c46e4aa" }
+      ],
+      "build": [
+        { "description": "Update golangci-lint-action from 8 to 9", "commit": "06cc583" },
+        { "description": "Update actions/checkout from 5 to 6", "commit": "97f1292" },
+        { "description": "Add .gitignore for development tools and build artifacts", "commit": "df487da" }
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2025-10-19",
+      "highlights": [
+        { "description": "Comprehensive SLO ontology with 22 dimensions for categorizing and filtering SLOs" },
+        { "description": "Multiple example sets: AI agents, RED metrics, USE metrics, SaaS CRM, budgeting methods" }
+      ],
+      "added": [
+        { "description": "Ontology package with 22 labeling dimensions for SLO categorization", "commit": "9db8193" },
+        { "description": "Label dimensions: framework, layer, scope, audience, category, severity, tier, metric-type, resource-type, service, team, environment, domain, process, access-model, risk-level, risk-type, capability, workflow, impact, journey-stage", "commit": "9db8193" },
+        { "description": "MetricReport type for analyzing label usage across SLO sets", "commit": "76d7b73" },
+        { "description": "Example set: AI agents with availability, cost efficiency, response quality, response time, task completion, user engagement SLOs", "commit": "7960a6b" },
+        { "description": "Example set: RED metrics (Rate, Errors, Duration) with availability SLO", "commit": "7960a6b" },
+        { "description": "Example set: USE metrics (Utilization, Saturation, Errors)", "commit": "7960a6b" },
+        { "description": "Example set: SaaS CRM with business outcomes, feature adoption, user activation, user engagement, user retention SLOs", "commit": "7960a6b" },
+        { "description": "JSON and YAML renderings of all example SLOs", "commit": "c4f35c9" },
+        { "description": "SLOsByDirAndFileSlug() and WriteExampleJSONAndYAMLFiles() helpers", "commit": "b1a7fad" },
+        { "description": "Labels() function for retrieving SLO labels", "commit": "9024230" },
+        { "description": "ExampleSLOsByDirectory() for loading examples by directory", "commit": "693a669" },
+        { "description": "WriteSLOSetsReport() for generating metrics documentation", "commit": "94d210e" }
+      ],
+      "changed": [
+        { "description": "All ontology labels now use kebab-case consistently", "commit": "de4e0ea" }
+      ],
+      "documentation": [
+        { "description": "METRICS.md generated documentation for example SLO sets", "commit": "3acf596" },
+        { "description": "Updated README.md with ontology and examples documentation", "commit": "880e2c7" }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2025-10-17",
+      "highlights": [
+        { "description": "Initial release with OpenSLO SDK wrapper and basic example SLOs" }
+      ],
+      "added": [
+        { "description": "Objects type for managing collections of OpenSLO objects", "commit": "1504310" },
+        { "description": "Initial Go code examples demonstrating OpenSLO SLO definitions", "commit": "6e40e4c" },
+        { "description": "MIT License", "commit": "7cc619a" },
+        { "description": "GitHub Actions CI workflow", "commit": "465ad68" },
+        { "description": "Initial README.md documentation", "commit": "c31a96a" }
+      ]
+    }
+  ]
+}
