@@ -48,6 +48,10 @@
         { "description": "Update golangci-lint-action from 8 to 9", "commit": "06cc583" },
         { "description": "Update actions/checkout from 5 to 6", "commit": "97f1292" },
         { "description": "Add .gitignore for development tools and build artifacts", "commit": "df487da" }
+      ],
+      "documentation": [
+        { "description": "Add UTF-8 icons to README bullet lists for improved readability", "commit": "ad76e02" },
+        { "description": "Add CHANGELOG.json and CHANGELOG.md covering v0.1.0-v0.3.0", "commit": "eb7184c" }
       ]
     },
     {
